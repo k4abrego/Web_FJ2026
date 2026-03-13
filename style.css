@@ -1,0 +1,39 @@
+@charset "UTF-8";
+:root {
+    --color-purple: #684AA4;
+    --color-sky-dark: #4CB6D1;
+    --color-pink: #E7BED3;
+    --color-pink-soft: #F0CFE0;
+    --color-lilac: #B9A0D6;
+    --color-navy: #165A87;
+    --color-teal: #58C7CF;
+    --color-gold: #E8B864;
+    --color-cream: #F8F6F2;
+
+    --primary-color: var(--color-purple);
+    --secondary-color: var(--color-pink);
+    --accent-color: var(--color-gold);
+    --text-color: var(--color-navy);
+    --background-color: var(--color-cream);
+
+    --font-family: "Fredoka", sans-serif;
+}
+
+html {
+  font-optical-sizing: auto;
+}
+
+body {
+  font-family: var(--font-family);
+  font-style: normal;
+}
+
+h1,
+h2,
+h3 {
+    color: var(--primary-color);
+}
+
+p {
+    color: var(--text-color);
+}
