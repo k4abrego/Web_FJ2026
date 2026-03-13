@@ -21,7 +21,8 @@
                     <img src="assets/logos/NIDE.png" alt="Logo NIDE" class="logo">
                 </a>
 
-                <div class="asset-strip" aria-label="espacio para assets de iconos pixel">                        <span class="asset-slot" > <img src="assets/headericons/cinta.png" alt="Icono pixel 1"> </span>
+                <div class="asset-strip" aria-label="espacio para assets de iconos pixel">                        
+                    <span class="asset-slot" > <img src="assets/headericons/cinta.png" alt="Icono pixel 1"> </span>
                     <span class="asset-slot"> <img src="assets/headericons/gorrito.png" alt="Icono pixel 2"> </span>
                     <span class="asset-slot"> <img src="assets/headericons/canastsa.png" alt="Icono pixel 3"> </span>
                     <span class="asset-slot"> <img src="assets/headericons/fut.png" alt="Icono pixel 4"> </span>
@@ -36,9 +37,17 @@
 
             <div class="header-lower-band" aria-hidden="true"></div>
         </header>
-
+        
+        <!--se dejó el rectángulo para meter el juego de unity-, ese espacio se va a usar--> 
         <main class="page-shell">
-            <h1 class="page-label">¡Bienvenidos a Overmath!</h1>
-
+            <section class="unity-hero">
+                <div class="unity-frame" aria-label="Recuadro para el videojuego">
+                    <div class="unity-frame-inner">
+                        <div class="unity-shell" id="unity-shell">
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
     </body>
 </html>
