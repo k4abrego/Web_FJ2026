@@ -44,7 +44,13 @@
                 <div class="unity-frame" aria-label="Recuadro para el videojuego">
                     <div class="unity-frame-inner">
                         <div class="unity-shell" id="unity-shell">
-                            <canvas id="unity-canvas" width="960" height="540" tabindex="-1" aria-label="Canvas del videojuego"></canvas>
+                            <canvas id="unity-canvas" width="960" height="600" tabindex="1" aria-label="Canvas del videojuego"></canvas>
+                            <div id="unity-loading" class="unity-loading">
+                                <p>Cargando juego...</p>
+                                <div class="unity-progress-bar">
+                                    <div id="unity-progress-fill" class="unity-progress-fill"></div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -60,10 +66,34 @@
                 <p href="#" class="mb-4 align-items-center" style="text-align: center;">¿Eres tutor?</p>
             </div>
         </section>
+
+        <footer class="site-footer">
+            <p>@2026 NIDE OVERMATH Todos los derechos reservados</p>
+        </footer>
+
+        <script src="unity-build/Build/unity-build.loader.js"></script>
+        <script>
+          var loadingOverlay = document.getElementById("unity-loading");
+          var progressFill   = document.getElementById("unity-progress-fill");
+
+          createUnityInstance(document.querySelector("#unity-canvas"), {
+            arguments: [],
+            dataUrl:      "unity-build/Build/unity-build.data",
+            frameworkUrl:  "unity-build/Build/unity-build.framework.js",
+            codeUrl:       "unity-build/Build/unity-build.wasm",
+            streamingAssetsUrl: "StreamingAssets",
+            companyName:   "DefaultCompany",
+            productName:   "Overmath_FJ2026",
+            productVersion: "1.0",
+          }, function (progress) {
+            progressFill.style.width = (progress * 100) + "%";
+          }).then(function (unityInstance) {
+            loadingOverlay.style.display = "none";
+            window.unityInstance = unityInstance;
+          }).catch(function (message) {
+            loadingOverlay.innerHTML = "<p>Error al cargar el juego.</p>";
+            console.error("Unity error:", message);
+          });
+        </script>
     </body>
-
-    <footer class="site-footer">
-        <p>@2026 NIDE OVERMATH Todos los derechos reservados</p>
-    </footer>
-
 </html>
