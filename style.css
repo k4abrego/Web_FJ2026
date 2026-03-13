@@ -8,7 +8,7 @@
     --color-navy: #165A87;
     --color-teal: #58C7CF;
     --color-gold: #E8B864;
-    --color-cream: #F8F6F2;
+    --color-cream: #EEF8FF;
 
     --primary-color: var(--color-purple);
     --secondary-color: var(--color-pink);
@@ -27,7 +27,7 @@ body {
   margin: 0;
   font-family: var(--font-family);
   font-style: normal;
-  background: #1f1f23;
+  background: #EEF8FF;
 }
 
 h1,
@@ -53,8 +53,7 @@ p {
 }
 
 .site-header {
-  background: #2e5e84;
-  box-shadow: 0 10px 4px rgba(0, 0, 0, 0.25);
+  background: #2e5e84;  
 }
 
 .site-nav {
@@ -79,15 +78,6 @@ p {
   height: auto;
   max-height: 80px;
   object-fit: contain;
-}
-
-.brand {
-  text-decoration: none;
-  color: var(--color-teal);
-  font-size: clamp(1.3rem, 2.4vw, 2.2rem);
-  font-weight: 700;
-  letter-spacing: 1px;
-  line-height: 1;
 }
 
 .asset-strip {
@@ -133,11 +123,6 @@ p {
 
 .menu-links a:hover {
   color: #f2fbff;
-}
-
-.header-lower-band {
-  height: 20px;
-  background: #c1ccd6;
 }
 
 @media (max-width: 980px) {
