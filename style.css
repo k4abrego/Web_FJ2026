@@ -42,7 +42,7 @@ p {
 
 .page-shell {
   width: min(92%, 1480px);
-  margin: 10px auto;
+  margin: 5px auto;
 }
 
 .page-label {
@@ -53,9 +53,8 @@ p {
 }
 
 .site-header {
-  border: 3px solid #1a98ea;
   background: #2e5e84;
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 10px 4px rgba(0, 0, 0, 0.25);
 }
 
 .site-nav {
@@ -64,6 +63,22 @@ p {
   display: flex;
   align-items: center;
   gap: 12px;
+}
+
+.navbar-brand {
+  display: inline-flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  text-decoration: none;
+}
+
+.logo {
+  display: block;
+  width: 208px;
+  height: auto;
+  max-height: 80px;
+  object-fit: contain;
 }
 
 .brand {
@@ -135,6 +150,11 @@ p {
 }
 
 @media (max-width: 600px) {
+  .logo {
+    width: 72px;
+    max-height: 24px;
+  }
+
   .asset-slot {
     width: 28px;
     height: 28px;
