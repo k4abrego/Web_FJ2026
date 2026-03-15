@@ -213,7 +213,7 @@ footer p{
 
 .logo {
   display: block;
-  width: 208px;
+  width: 100px;
   height: auto;
   max-height: 80px;
   object-fit: contain;
