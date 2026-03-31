@@ -1,4 +1,4 @@
-import SiteHeader from '../components/SiteHeader'
+import SiteHeader from '../components/Header'
 
 function ContactoPage() {
   return (
