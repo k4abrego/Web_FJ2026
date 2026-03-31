@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="Overmath videogame">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Slabo+13px&display=swap" rel="stylesheet">
+
+
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <title>Control de Progreso - Tutor</title>
+    </head>
+
+
+        <header class="site-header">
+            <nav class="site-nav" aria-label="Navegacion principal">
+                <a class="navbar-brand" href="index.html">                        
+                    <img src="assets/logos/estrella.png" alt="Logo NIDE" class="logo">
+                </a>
+            </nav>
+            <div class="header-lower-band" aria-hidden="true"></div>
+        </header>
+
+    <body>
+        <main class="tutor-dashboard-wrap">
+            <section class="tutor-dashboard" aria-label="Dashboard académico de seguimiento">
+                <article class="profile-card">
+                    <div class="profile-left">
+                                <div class="student-avatar" role="img" aria-label="Avatar del estudiante">
+                            <span>JV</span>
+                        </div>
+                    </div>
+
+                    <div class="profile-center">
+                        <h1>Goku123</h1>
+                        <p><strong>Nombre:</strong></p>
+                        <h2>Juan Valdez Montes</h2>
+                    </div>
+
+                    <div class="profile-right">
+                        <div class="profile-meta-block">
+                            <p><strong>Cumpleaños:</strong></p>
+                            <h3>09/04</h3>
+                        </div>
+                        <div class="profile-meta-block">
+                            <p><strong>Tutor(a):</strong></p>
+                            <h3>Gianna Montes</h3>
+                        </div>
+                    </div>
+                </article>
+
+                <section class="dashboard-grid">
+                    <aside class="tips-card" aria-label="Consejos del tutor">
+                        <h3>Tutor(a) Tips:</h3>
+
+                        <div class="tip-item">
+                            <p class="tip-icon" aria-hidden="true">💡</p>
+                            <p>Para la isla multiplicación: practica las tablas del 7 y 8 fuera de la plataforma.</p>
+                        </div>
+
+                        <div class="tip-item">
+                            <p class="tip-icon" aria-hidden="true">🛠</p>
+                            <p>Para la isla de resta: revisa las restas con decimales en sesiones cortas diarias.</p>
+                        </div>
+
+                        <div class="tip-item">
+                            <p class="tip-icon" aria-hidden="true">🏆</p>
+                            <p>Ha mejorado en su enfoque de -15% a +5% este mes. Reconoce ese esfuerzo constante.</p>
+                        </div>
+                    </aside>
+
+                    <div class="dashboard-main">
+                        <article class="card progress-card" aria-label="Velocidad de progreso en matemáticas">
+                            <header class="card-header progress-header">
+                                <div>
+                                    <h3>Velocidad de Progreso en Matemáticas</h3>
+                                    <p>Promedio de crecimiento de puntuación en matemáticas en las últimas 4 semanas</p>
+                                </div>
+                                <div class="progress-tabs" role="tablist" aria-label="Vista de métrica">
+                                    <button class="tab-button active" type="button" role="tab" aria-selected="true">Puntuación</button>
+                                    <button class="tab-button" type="button" role="tab" aria-selected="false">Participación</button>
+                                </div>
+                            </header>
+
+                            <div class="chart-wrap" aria-label="Gráfica de progreso">
+                                <div class="chart-y-labels" aria-hidden="true">
+                                    <span>600 Ptos.</span>
+                                    <span>500 Ptos.</span>
+                                    <span>400 Ptos.</span>
+                                    <span>300 Ptos.</span>
+                                </div>
+
+                                <div class="chart-canvas">
+                                    <svg viewBox="0 0 760 280" role="img" aria-label="Línea roja y línea azul de progreso ascendente">
+                                        <line x1="40" y1="40" x2="740" y2="40"></line>
+                                        <line x1="40" y1="110" x2="740" y2="110"></line>
+                                        <line x1="40" y1="180" x2="740" y2="180"></line>
+                                        <line x1="40" y1="250" x2="740" y2="250"></line>
+
+                                        <path class="line-blue" d="M45,212 C180,198 290,166 400,148 C520,130 610,112 735,103"></path>
+                                        <path class="line-red" d="M45,220 C165,214 295,168 400,130 C516,92 610,66 735,45"></path>
+                                    </svg>
+
+                                    <div class="chart-tooltip">580 Ptos.</div>
+
+                                    <div class="chart-x-labels" aria-hidden="true">
+                                        <span>Semana 1</span>
+                                        <span>Semana 2</span>
+                                        <span>Semana 3</span>
+                                        <span>Actual</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="card badges-card" aria-label="Insignias del estudiante">
+                            <h3>Insignias</h3>
+                            <div class="badges-row">
+                                <div class="badge-item">
+                                    <div class="badge-shape blue">➖</div>
+                                    <p>Resta Veloz</p>
+                                </div>
+
+                                <div class="badge-item badge-featured">
+                                    <div class="badge-shape gold">⭐</div>
+                                    <p>Maestro de las Sumas</p>
+                                </div>
+
+                                <div class="badge-item">
+                                    <div class="badge-shape sky">⚡</div>
+                                    <p>Multiplicación Precisa</p>
+                                </div>
+
+                                <div class="badge-item">
+                                    <div class="badge-shape green">10</div>
+                                    <p>Racha de 10 Días Correctos</p>
+                                </div>
+
+                                <div class="badge-item">
+                                    <div class="badge-shape orange">🧩</div>
+                                    <p>Solucionador de Fracciones</p>
+                                </div>
+                            </div>
+                        </article>
+
+                        <section class="bottom-grid">
+                            <article class="card skills-card" aria-label="Habilidades de matemáticas básicas">
+                                <h3>Habilidades de Matemáticas Básicas</h3>
+
+                                <div class="skills-legend" aria-hidden="true">
+                                    <span><i class="dot dot-blue"></i>Suma</span>
+                                    <span><i class="dot dot-lilac"></i>Resta</span>
+                                    <span><i class="dot dot-pink"></i>Multiplicación</span>
+                                    <span><i class="dot dot-gray"></i>Promedio Clase</span>
+                                    <span><i class="dot dot-gold"></i>Fracciones</span>
+                                </div>
+
+                                <div class="radar-wrap">
+                                    <svg viewBox="0 0 360 280" role="img" aria-label="Gráfica radar de habilidades">
+                                        <polygon class="radar-grid" points="180,30 295,95 260,222 100,222 65,95"></polygon>
+                                        <polygon class="radar-grid" points="180,60 270,110 242,208 118,208 90,110"></polygon>
+                                        <polygon class="radar-grid" points="180,90 245,125 225,194 135,194 115,125"></polygon>
+
+                                        <line x1="180" y1="30" x2="180" y2="222"></line>
+                                        <line x1="65" y1="95" x2="260" y2="222"></line>
+                                        <line x1="295" y1="95" x2="100" y2="222"></line>
+
+                                        <polygon class="radar-data radar-blue" points="180,78 252,124 214,178 138,186 98,124"></polygon>
+                                        <polygon class="radar-data radar-lilac" points="180,62 238,116 228,188 142,174 112,128"></polygon>
+                                        <polygon class="radar-data radar-gold" points="180,112 212,138 238,198 148,202 132,146"></polygon>
+
+                                        <text x="178" y="16">Restas</text>
+                                        <text x="15" y="98">Sumas</text>
+                                        <text x="278" y="98">Multiplicaciones</text>
+                                        <text x="256" y="244">Fracciones</text>
+                                        <text x="62" y="244">Divisiones</text>
+                                    </svg>
+                                </div>
+
+                                <footer class="skills-footer">
+                                    <p><span>HABILIDAD MÁS FUERTE</span> Sumas (+20%)</p>
+                                    <p><span>ÁREA DE ENFOQUE</span> Fracciones (-15%)</p>
+                                </footer>
+                            </article>
+
+                            <article class="card route-card" aria-label="Ruta de crecimiento en matemáticas básicas">
+                                <header class="route-header">
+                                    <h3>Ruta de Crecimiento: Matemáticas Básicas</h3>
+                                    <a href="#" aria-label="Ver todos los hitos">Ver Todos</a>
+                                </header>
+
+                                <div class="route-timeline">
+                                    <div class="route-item">
+                                        <div class="route-date">OCT <strong>10</strong></div>
+                                        <div class="route-content route-highlight">
+                                            <div class="route-topline">
+                                                <h4>Evaluación Intermedia: Habilidades de Suma</h4>
+                                                <span>+40 Ptos.</span>
+                                            </div>
+                                            <p>Mejora significativa en la velocidad y precisión de sumas complejas. Puntuación de Suma: 530 Ptos. | Nivel: Avanzado.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="route-item">
+                                        <div class="route-date">SEP <strong>12</strong></div>
+                                        <div class="route-content">
+                                            <h4>Evaluación de Referencia: Operaciones Básicas</h4>
+                                            <p>Puntuación de Resta: 410 Ptos. | Nivel: Básico.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="route-item">
+                                        <div class="route-date">AGO <strong>28</strong></div>
+                                        <div class="route-content">
+                                            <h4>Progreso de la Isla de las Fracciones: Introducción</h4>
+                                            <p>Completada la etapa inicial de identificación de fracciones simples. Puntuación de Fracciones: 380 Ptos. | Enviado al Portal de Padres.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </article>
+                        </section>
+                    </div>
+                </section>
+            </section>
+        </main>
+    </body>
+
+    <footer class="site-footer">
+        <p>@2026 NIDE OVERMATH Todos los derechos reservados</p>        
+    </footer>
+
+</html>

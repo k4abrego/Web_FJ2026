@@ -63,10 +63,8 @@
 				<div class="col-md-2">
                     <h1 class="mb-4 align-items-center ">¡Salva a las islas del pentágono de las bermudas!</h1>
                     <h2 class="mb-4 align-items-center ">Conoce OVERMATH, un juego lleno de emoción, aventura y aprendizaje. Mejorarás tus habilidades matemáticas y de razonamiento lógico </h2>
-                    <h3> hola papu   </h3>
-                    <p> Estamos viendo que rollito </p>
 			    </div>
-                <p href="#" class="mb-4 align-items-center" style="text-align: center;">¿Eres tutor?</p>
+                <a href="login-tutor.html" class="tutor-link">¿Eres tutor?</a>
             </div>
         </section>
 
@@ -74,29 +72,8 @@
             <p>@2026 NIDE OVERMATH Todos los derechos reservados</p>
         </footer>
 
-        <script src="unity-build/Build/unity-build.loader.js"></script>
-        <script>
-          var loadingOverlay = document.getElementById("unity-loading");
-          var progressFill   = document.getElementById("unity-progress-fill");
-
-          createUnityInstance(document.querySelector("#unity-canvas"), {
-            arguments: [],
-            dataUrl:      "unity-build/Build/unity-build.data",
-            frameworkUrl:  "unity-build/Build/unity-build.framework.js",
-            codeUrl:       "unity-build/Build/unity-build.wasm",
-            streamingAssetsUrl: "StreamingAssets",
-            companyName:   "DefaultCompany",
-            productName:   "Overmath_FJ2026",
-            productVersion: "1.0",
-          }, function (progress) {
-            progressFill.style.width = (progress * 100) + "%";
-          }).then(function (unityInstance) {
-            loadingOverlay.style.display = "none";
-            window.unityInstance = unityInstance;
-          }).catch(function (message) {
-            loadingOverlay.innerHTML = "<p>Error al cargar el juego.</p>";
-            console.error("Unity error:", message);
-          });
-        </script>
+                <script src="unity-build/Build/unity-build.loader.js"></script>
+                <script src="js/unity-init.js"></script>
+                <script src="js/app.js"></script>
     </body>
 </html>
