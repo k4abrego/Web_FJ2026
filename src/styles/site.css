@@ -250,6 +250,67 @@ h3 {
   padding: 20px;
 }
 
+.conocenos-page {
+  background: #dfe8f3;
+}
+
+.conocenos-hero {
+  padding: 18px 0 34px;
+}
+
+.conocenos-hero-inner {
+  width: min(100%, 1480px);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 0.95fr 1.05fr;
+  gap: 0;
+  overflow: hidden;
+  border-radius: 34px;
+  box-shadow: 0 14px 34px rgba(24, 55, 87, 0.14);
+  background: linear-gradient(90deg, #e8eef7 0%, #dbe7f2 45%, #d1deeb 100%);
+}
+
+.conocenos-hero-copy {
+  padding: clamp(30px, 5vw, 58px) clamp(20px, 4vw, 56px);
+}
+
+.conocenos-hero-copy h1 {
+  margin: 0 0 18px;
+  color: #133a67;
+  text-align: left;
+  font-size: clamp(2rem, 5vw, 4.2rem);
+  line-height: 1.02;
+}
+
+.conocenos-hero-copy p {
+  margin: 0;
+  max-width: 30ch;
+  color: #1a3554;
+  font-size: clamp(1.02rem, 1.75vw, 1.92rem);
+  line-height: 1.55;
+}
+
+.conocenos-cta {
+  margin-top: 52px;
+  border: 0;
+  border-radius: 20px;
+  padding: 12px 22px;
+  background: #e8b864;
+  color: #1f3e60;
+  font-family: var(--font-family);
+  font-size: 1.05rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.conocenos-hero-media {
+  min-height: clamp(340px, 50vw, 620px);
+  background-image:
+    linear-gradient(270deg, rgba(18, 40, 63, 0.22) 0%, rgba(18, 40, 63, 0.06) 36%, rgba(223, 232, 243, 0.94) 100%),
+    url('/assets/conocenos1.jpg');
+  background-size: cover;
+}
+
 @media (max-width: 600px) {
   .logo {
     width: 72px;
@@ -291,6 +352,19 @@ h3 {
 
   .game-intro {
     padding-inline: clamp(14px, 6vw, 24px);
+  }
+
+  .conocenos-hero-inner {
+    grid-template-columns: 1fr;
+    border-radius: 24px;
+  }
+
+  .conocenos-hero-copy p {
+    max-width: none;
+  }
+
+  .conocenos-hero-media {
+    min-height: 280px;
   }
 }
 
