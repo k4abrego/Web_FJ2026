@@ -1,42 +1,24 @@
-# macOS
-.DS_Store
-**/.DS_Store
-
-# Node.js
-node_modules/
+# Logs
+logs
+*.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
 
-# Unity generated folders
-[Ll]ibrary/
-[Tt]emp/
-[Oo]bj/
-[Bb]uild/
-[Bb]uilds/
-[Ll]ogs/
-[Mm]emoryCaptures/
-UserSettings/
+node_modules
+dist
+dist-ssr
+*.local
 
-# Unity generated files
-*.pidb
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
 *.suo
-*.user
-*.userprefs
-*.unityproj
-*.booproj
-*.svd
-*.pdb
-*.mdb
-*.opendb
-*.VC.db
-
-# Visual Studio / Rider
-.vscode/
-.idea/
-*.csproj
+*.ntvs*
+*.njsproj
 *.sln
-*.suo
-
-# Keep accidental nested copy out of repo
-Web_FJ2026/
+*.sw?
