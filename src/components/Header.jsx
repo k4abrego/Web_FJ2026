@@ -30,7 +30,7 @@ function SiteHeader({ compact = false }) {
 
             <ul className="menu-links">
               <li>
-                <NavLink to="/conocenos">Conocenos</NavLink>
+                <NavLink to="/conocenos">Conócenos</NavLink>
               </li>
               <li>
                 <NavLink to="/contacto">Contacto</NavLink>
