@@ -41,6 +41,11 @@ h2{
     font-size: clamp(1.4rem, 2.4vw, 2.2rem);
 }
 
+h3{
+  color: color-mix(in srgb, var(--primary-color) 70%, var(--secondary-color) 30%);
+  font-size: clamp(1.3rem, 2.1vw, 1.75rem);
+}
+
 p {
     color: var(--text-color);
     font-size: clamp(1.25rem, 1.6vw, 1.25rem);
@@ -73,7 +78,7 @@ footer p{
 }
 
 .site-header {
-  background: #2e5e84;  
+  background: #2e5e84;
 }
 
 .unity-hero {
@@ -101,8 +106,8 @@ footer p{
 }
 
 .unity-frame {
-  width: min(100%, 1920px);
-  aspect-ratio: 1920 / 1080;
+  width: min(90%, 1800px);
+  aspect-ratio: 16 / 9;
   margin: 0 auto;
   border-radius: 28px;
   overflow: hidden;
@@ -220,8 +225,8 @@ footer p{
 }
 
 .site-nav {
-  min-height: 44px;
-  padding: 4px 6px;
+  min-height: 36px;
+  padding: 2px 6px;
   display: flex;
   align-items: center;
   gap: 12px;
@@ -237,9 +242,9 @@ footer p{
 
 .logo {
   display: block;
-  width: 100px;
+  width: 80px;
   height: auto;
-  max-height: 80px;
+  max-height: 60px;
   object-fit: contain;
 }
 
@@ -251,8 +256,8 @@ footer p{
 }
 
 .asset-slot {
-  width: 52px;
-  height: 52px;
+  width: 44px;
+  height: 44px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -307,6 +312,13 @@ footer p{
   }
 }
 
+@media (max-width: 768px) {
+  .unity-frame {
+    width: min(98%, 800px);
+    aspect-ratio: 16 / 9;
+  }
+}
+
 @media (max-width: 600px) {
   .logo {
     width: 72px;
@@ -337,8 +349,14 @@ footer p{
   }
 
   .unity-frame {
+    width: 100%;
+    aspect-ratio: 16 / 9;
     border-width: 3px;
-    border-radius: 20px;
+    border-radius: 28px;
+    background-image: url('/assets/background.png');
+    background-size: 105%;
+    background-position: center;
+    background-repeat: no-repeat;
   }
 
   .unity-frame-inner {
@@ -467,7 +485,7 @@ body.tutor-dashboard-page {
 
 .tutor-topbar {
   width: 100%;
-  min-height: 56px;
+  min-height: 48px;
   background: var(--dash-navy);
   display: flex;
   align-items: center;

@@ -3,7 +3,6 @@
   var progressFill = document.getElementById("unity-progress-fill");
   var canvas = document.getElementById("unity-canvas");
 
-  // Safety guard so this script can exist without breaking pages that do not have Unity markup.
   if (!loadingOverlay || !progressFill || !canvas || typeof createUnityInstance !== "function") {
     return;
   }
