@@ -1,61 +1,16 @@
 <!DOCTYPE html>
 <html lang="es">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Acceso para tutores - Overmath">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Slabo+13px&display=swap" rel="stylesheet">
-
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <title>Login Tutor</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="refresh" content="0; url=/web-react/login-tutor" />
+    <title>Redirigiendo a Login Tutor</title>
+    <script>
+      window.location.replace('/web-react/login-tutor')
+    </script>
   </head>
-
   <body>
-    <header class="site-header">
-      <nav class="site-nav" aria-label="Navegacion principal">
-        <a class="navbar-brand" href="index.html">
-          <img src="assets/logos/estrella.png" alt="Logo NIDE" class="logo">
-        </a>
-
-        <div class="asset-strip" aria-label="espacio para assets de iconos pixel">
-          <span class="asset-slot"><img src="assets/headericons/cinta.png" alt="Icono pixel 1"></span>
-          <span class="asset-slot"><img src="assets/headericons/gorrito.png" alt="Icono pixel 2"></span>
-          <span class="asset-slot"><img src="assets/headericons/canastsa.png" alt="Icono pixel 3"></span>
-          <span class="asset-slot"><img src="assets/headericons/fut.png" alt="Icono pixel 4"></span>
-          <span class="asset-slot"><img src="assets/headericons/tae.png" alt="Icono pixel 5"></span>
-        </div>
-
-        <ul class="menu-links">
-          <li><a href="conocenos.html">Conocenos</a></li>
-          <li><a href="contacto.html">Contacto</a></li>
-        </ul>
-      </nav>
-
-      <div class="header-lower-band" aria-hidden="true"></div>
-    </header>
-
-    <main class="login-main">
-      <section class="login-card" aria-labelledby="login-title">
-        <h1 id="login-title">Acceso tutor</h1>
-        <form id="tutor-login-form" class="login-form" data-api-base="http://localhost:3000/api" novalidate>
-          <label for="email">Correo</label>
-          <input id="email" name="email" type="email" autocomplete="email" required>
-
-          <label for="password">Contrasena</label>
-          <input id="password" name="password" type="password" autocomplete="current-password" minlength="8" required>
-
-          <button id="login-submit" type="submit">Entrar</button>
-          <p id="login-message" class="login-message" role="status" aria-live="polite"></p>
-        </form>
-      </section>
-    </main>
+    <p>Redirigiendo al nuevo login en React...</p>
+    <p><a href="/web-react/login-tutor">Continuar</a></p>
   </body>
-
-    <footer class="site-footer">
-        <p>@2026 NIDE OVERMATH Todos los derechos reservados</p>        
-    </footer>
-
 </html>
