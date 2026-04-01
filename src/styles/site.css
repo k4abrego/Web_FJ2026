@@ -311,6 +311,39 @@ h3 {
   background-size: cover;
 }
 
+.conocenos-who {
+  margin: 0 auto;
+  padding: 6px 0 34px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(20px, 3.5vw, 46px);
+  align-items: center;
+}
+
+.conocenos-who-copy h2 {
+  margin: 0 0 16px;
+  color: #133a67;
+  font-size: clamp(2rem, 3.8vw, 3.3rem);
+  line-height: 1.1;
+}
+
+.conocenos-who-copy p {
+  margin: 0;
+  color: #293c52;
+  font-size: clamp(1rem, 1.35vw, 1.55rem);
+  line-height: 1.65;
+}
+
+.conocenos-who-media {
+  width: 100%;
+  min-height: clamp(260px, 35vw, 420px);
+  border-radius: 24px;
+  background-image: url('/assets/nide2.jpg');
+  background-size: cover;
+  background-position: center 36%;
+  box-shadow: 0 12px 26px rgba(26, 55, 84, 0.18);
+}
+
 @media (max-width: 600px) {
   .logo {
     width: 72px;
@@ -365,6 +398,16 @@ h3 {
 
   .conocenos-hero-media {
     min-height: 280px;
+  }
+
+  .conocenos-who {
+    grid-template-columns: 1fr;
+    padding: 6px 0 24px;
+  }
+
+  .conocenos-who-media {
+    min-height: 220px;
+    border-radius: 20px;
   }
 }
 
