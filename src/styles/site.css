@@ -338,9 +338,11 @@ h3 {
   width: 100%;
   min-height: clamp(260px, 35vw, 420px);
   border-radius: 24px;
-  background-image: url('/assets/nide2.jpg');
+  background-image: url('');
   background-size: cover;
-  background-position: center 36%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: local;
   box-shadow: 0 12px 26px rgba(26, 55, 84, 0.18);
 }
 

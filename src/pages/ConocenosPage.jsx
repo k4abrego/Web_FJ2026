@@ -36,7 +36,7 @@ function ConocenosPage() {
           <div
             className="conocenos-who-media"
             role="img"
-            aria-label="Personas de la fundación con donativos"
+            aria-label="Imagen de NIDE"
           ></div>
         </section>
       </main>
