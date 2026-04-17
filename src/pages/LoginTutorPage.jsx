@@ -15,13 +15,13 @@ function LoginTutorPage() {
 
     if (!email || !password) {
       setStatus('is-error')
-      setMessage('Completa correo y contrasena.')
+      setMessage('Completa correo y contraseña.')
       return
     }
 
     if (password.length < 8) {
       setStatus('is-error')
-      setMessage('La contrasena debe tener al menos 8 caracteres.')
+      setMessage('La contraseña debe tener al menos 8 caracteres.')
       return
     }
 
