@@ -4,7 +4,7 @@ function SiteHeader({ compact = false }) {
   return (
     <header className="site-header">
       <nav className="site-nav" aria-label="Navegacion principal">
-        <NavLink className="navbar-brand" to="/">
+        <NavLink className="navbar-brand" to="HomePage">
           <img src="/assets/logos/estrella.png" alt="Logo NIDE" className="logo" />
         </NavLink>
 
