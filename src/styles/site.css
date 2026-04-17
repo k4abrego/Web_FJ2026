@@ -84,6 +84,8 @@ h3 {
   overflow: hidden;
   border: none;
   background: transparent;
+  border-radius: 12px;
+  transition: transform 180ms ease, background-color 180ms ease, box-shadow 180ms ease;
 }
 
 .asset-slot img {
@@ -91,6 +93,35 @@ h3 {
   height: 100%;
   display: block;
   object-fit: contain;
+  transition: transform 180ms ease, filter 180ms ease;
+}
+
+.asset-slot:hover {
+  transform: translateY(-2px) scale(1.06);
+  background-color: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 6px 14px rgba(10, 28, 47, 0.14);
+}
+
+.asset-slot:hover img {
+  transform: scale(1.08) rotate(-2deg);
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.18));
+}
+
+.asset-slot:focus-visible {
+  outline: 2px solid #f2fbff;
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .asset-slot,
+  .asset-slot img {
+    transition: none;
+  }
+
+  .asset-slot:hover,
+  .asset-slot:hover img {
+    transform: none;
+  }
 }
 
 .menu-links {
