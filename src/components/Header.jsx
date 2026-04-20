@@ -35,6 +35,9 @@ function SiteHeader({ compact = false }) {
               <li>
                 <NavLink to="/contacto">Contacto</NavLink>
               </li>
+              <li>
+                <NavLink to="/login" className="btn-login">Iniciar Sesión</NavLink>
+              </li>
             </ul>
           </>
         ) : null}

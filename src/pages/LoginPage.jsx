@@ -1,0 +1,138 @@
+import { useState } from 'react'
+import { Link } from 'react-router-dom'
+import SiteHeader from '../components/Header'
+
+function LoginPage() {
+  const [role, setRole] = useState(null)
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [message, setMessage] = useState('')
+  const [status, setStatus] = useState('')
+  const [isSubmitting, setIsSubmitting] = useState(false)
+
+  const handleSubmit = (event) => {
+    event.preventDefault()
+
+    if (!email || !password) {
+      setStatus('is-error')
+      setMessage('Completa correo y contraseña.')
+      return
+    }
+
+    if (password.length < 8) {
+      setStatus('is-error')
+      setMessage('La contraseña debe tener al menos 8 caracteres.')
+      return
+    }
+
+    setIsSubmitting(true)
+    setStatus('is-success')
+    setMessage('Acceso correcto. Redirigiendo...')
+  }
+
+  const handleBack = () => {
+    setRole(null)
+    setEmail('')
+    setPassword('')
+    setMessage('')
+    setStatus('')
+    setIsSubmitting(false)
+  }
+
+  return (
+    <>
+      <SiteHeader />
+
+      <main className="login-main">
+        <section className="login-card" aria-labelledby="login-title">
+          {!role ? (
+            <>
+              <h1 id="login-title">Iniciar Sesión</h1>
+              <p className="login-subtitle" style={{ textAlign: 'center' }}>
+                Selecciona tu tipo de cuenta
+              </p>
+              <div className="login-role-picker">
+                <button
+                  type="button"
+                  className="role-card"
+                  onClick={() => setRole('tutor')}
+                >
+                  Tutor
+                </button>
+                <button
+                  type="button"
+                  className="role-card"
+                  onClick={() => setRole('admin')}
+                >
+                  Administrador
+                </button>
+              </div>
+            </>
+          ) : (
+            <>
+              <button type="button" className="login-back-btn" onClick={handleBack}>
+                ← Cambiar rol
+              </button>
+              <h1 id="login-title">
+                {role === 'tutor' ? 'Acceso Tutor' : 'Acceso Administrador'}
+              </h1>
+              <form
+                className="login-form"
+                onSubmit={handleSubmit}
+                noValidate
+              >
+                <label htmlFor="login-email">Correo</label>
+                <input
+                  id="login-email"
+                  name="email"
+                  type="email"
+                  autoComplete="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
+
+                <label htmlFor="login-password">Contraseña</label>
+                <input
+                  id="login-password"
+                  name="password"
+                  type="password"
+                  autoComplete="current-password"
+                  minLength="8"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
+
+                <button type="submit" disabled={isSubmitting}>
+                  {isSubmitting ? 'Entrando...' : 'Entrar'}
+                </button>
+
+                <p
+                  className={`login-message ${status}`.trim()}
+                  role="status"
+                  aria-live="polite"
+                >
+                  {message}
+                </p>
+              </form>
+
+              <p className="login-signup-prompt">
+                ¿No estás registrado aún?{' '}
+                <Link to="#" onClick={(e) => e.preventDefault()}>
+                  Presiona aquí para registrarte
+                </Link>
+              </p>
+            </>
+          )}
+        </section>
+      </main>
+
+      <footer className="site-footer">
+        <p>@2026 NIDE OVERMATH Todos los derechos reservados</p>
+      </footer>
+    </>
+  )
+}
+
+export default LoginPage
