@@ -37,7 +37,7 @@ function LoginPage() {
       const response = await fetch(API_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password, deviceType: 'web', rol: role === 'admin' ? 'administrador' : 'tutor' }),
+        body: JSON.stringify({ email, password, deviceType: 'web', rol: role === 'admin' ? 'admin' : 'tutor' }),
       })
 
       const data = await response.json()
@@ -58,7 +58,7 @@ function LoginPage() {
 
       setStatus('is-success')
       setMessage('Acceso correcto. Redirigiendo...')
-      setTimeout(() => navigate('/'), 1000)
+      setTimeout(() => navigate(role === 'admin' ? '/admin' : '/'), 1000)
     } catch {
       setStatus('is-error')
       setMessage('Error de conexión. Intenta de nuevo.')

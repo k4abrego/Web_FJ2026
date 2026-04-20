@@ -43,6 +43,16 @@ function SiteHeader({ compact = false }) {
               <li>
                 <NavLink to="/contacto">Contacto</NavLink>
               </li>
+              {session?.role === 'tutor' && (
+                <li>
+                  <NavLink to="/vincular-jugador">Vincular Jugador</NavLink>
+                </li>
+              )}
+              {session?.role === 'admin' && (
+                <li>
+                  <NavLink to="/admin">Dashboard</NavLink>
+                </li>
+              )}
               <li>
                 {session ? (
                   <button type="button" className="btn-login" onClick={handleLogout}>
