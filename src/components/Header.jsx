@@ -1,10 +1,18 @@
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 
 function SiteHeader({ compact = false }) {
+  const navigate = useNavigate()
+  const session = JSON.parse(localStorage.getItem('session') || 'null')
+
+  const handleLogout = () => {
+    localStorage.removeItem('session')
+    navigate('/login')
+  }
+
   return (
     <header className="site-header">
       <nav className="site-nav" aria-label="Navegacion principal">
-        <NavLink className="navbar-brand" to="HomePage">
+        <NavLink className="navbar-brand" to="/">
           <img src="/assets/logos/estrella.png" alt="Logo NIDE" className="logo" />
         </NavLink>
 
@@ -36,7 +44,13 @@ function SiteHeader({ compact = false }) {
                 <NavLink to="/contacto">Contacto</NavLink>
               </li>
               <li>
-                <NavLink to="/login" className="btn-login">Iniciar Sesión</NavLink>
+                {session ? (
+                  <button type="button" className="btn-login" onClick={handleLogout}>
+                    Cerrar Sesión
+                  </button>
+                ) : (
+                  <NavLink to="/login" className="btn-login">Iniciar Sesión</NavLink>
+                )}
               </li>
             </ul>
           </>

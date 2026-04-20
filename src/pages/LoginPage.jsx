@@ -42,12 +42,19 @@ function LoginPage() {
 
       const data = await response.json()
 
-      if (!response.ok) {
+      if (!response.ok || data.result?.ok === false) {
         setStatus('is-error')
         setMessage(data.error || data.message || 'Credenciales incorrectas.')
         setIsSubmitting(false)
         return
       }
+
+      const user = data.result?.user
+      localStorage.setItem('session', JSON.stringify({
+        id_cuenta: user?.id_cuenta,
+        correo: user?.correo,
+        role,
+      }))
 
       setStatus('is-success')
       setMessage('Acceso correcto. Redirigiendo...')
