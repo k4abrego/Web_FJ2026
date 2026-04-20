@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Link, useNavigate, useSearchParams } from 'react-router-dom'
 import SiteHeader from '../components/Header'
 
-const API_URL = 'https://q623ldzsbzpk3j6nktpzcvqi7y0qrpsr.lambda-url.us-east-1.on.aws/login'
+const API_URL = 'https://q623ldzsbzpk3j6nktpzcvqi7y0qrpsr.lambda-url.us-east-1.on.aws/login_tutor_admin'
 
 function LoginPage() {
   const navigate = useNavigate()
@@ -37,7 +37,7 @@ function LoginPage() {
       const response = await fetch(API_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password, deviceType: 'web' }),
+        body: JSON.stringify({ email, password, deviceType: 'web', rol: role === 'admin' ? 'administrador' : 'tutor' }),
       })
 
       const data = await response.json()
