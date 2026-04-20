@@ -144,6 +144,25 @@ h3 {
   color: #f2fbff;
 }
 
+.btn-login {
+  display: inline-block;
+  padding: 6px 18px;
+  border-radius: 20px;
+  background: var(--color-gold);
+  color: #1f3e60 !important;
+  font-weight: 600;
+  font-size: clamp(0.85rem, 1.1vw, 1.05rem);
+  text-decoration: none !important;
+  transition: background 180ms ease, transform 180ms ease;
+}
+
+.btn-login:hover,
+.btn-login.active {
+  background: #d4a44e;
+  color: #1f3e60 !important;
+  transform: translateY(-1px);
+}
+
 .header-lower-band {
   height: 14px;
   background: linear-gradient(to right, #91d6ec, #7cc8e5, #8bd0f2);
@@ -397,6 +416,11 @@ h3 {
     font-size: 0.9rem;
   }
 
+  .btn-login {
+    padding: 4px 12px;
+    font-size: 0.8rem;
+  }
+
   .unity-hero {
     padding-top: 24px;
   }
@@ -523,5 +547,97 @@ h3 {
 
 .login-message.is-success {
   color: #1f885f;
+}
+
+/* login unificado */
+.login-role-picker {
+  display: flex;
+  gap: 18px;
+  justify-content: center;
+  margin: 18px 0 6px;
+}
+
+.role-card {
+  flex: 1;
+  max-width: 180px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 22px 14px;
+  border: 2px solid #c9dff0;
+  border-radius: 16px;
+  background: #f4faff;
+  cursor: pointer;
+  font-family: var(--font-family);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-navy);
+  transition: border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+}
+
+.role-card:hover {
+  border-color: var(--color-sky-dark);
+  box-shadow: 0 6px 18px rgba(22, 90, 135, 0.12);
+  transform: translateY(-2px);
+}
+
+.role-card.selected {
+  border-color: var(--color-purple);
+  background: #ece4f8;
+  box-shadow: 0 6px 20px rgba(104, 74, 164, 0.18);
+}
+
+.role-icon {
+  font-size: 2.2rem;
+  line-height: 1;
+}
+
+.login-back-btn {
+  border: none;
+  background: none;
+  color: var(--color-sky-dark);
+  font-family: var(--font-family);
+  font-size: 0.92rem;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 0;
+  margin-bottom: 10px;
+}
+
+.login-back-btn:hover {
+  text-decoration: underline;
+}
+
+.login-signup-prompt {
+  margin: 14px 0 0;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #4a6d86;
+}
+
+.login-signup-prompt a {
+  color: var(--color-purple);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.login-signup-prompt a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 600px) {
+  .login-role-picker {
+    gap: 12px;
+  }
+
+  .role-card {
+    padding: 16px 10px;
+    max-width: 150px;
+  }
+
+  .role-icon {
+    font-size: 1.8rem;
+  }
 }
 
