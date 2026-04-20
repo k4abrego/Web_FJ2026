@@ -28,7 +28,7 @@ function HomePage() {
               Mejorarás tus habilidades matemáticas y de razonamiento lógico
             </h2>
           </div>
-          <Link to="/login-tutor" className="tutor-link">
+          <Link to="/login?role=tutor" className="tutor-link">
             ¿Eres tutor?
           </Link>
         </div>
