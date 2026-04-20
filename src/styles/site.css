@@ -245,17 +245,17 @@ h3 {
 }
 
 .game-info-section {
-  width: min(96%, 1320px);
+  width: min(98%, 1580px);
   margin: 0 auto;
-  padding: 0 clamp(14px, 3vw, 40px) clamp(24px, 4vw, 56px);
+  padding: 0 clamp(22px, 4vw, 72px) clamp(36px, 5vw, 84px);
   display: grid;
-  gap: clamp(34px, 5vw, 78px);
+  gap: clamp(44px, 6vw, 96px);
 }
 
 .info-block {
   display: grid;
-  gap: 20px;
-  width: min(100%, 1040px);
+  gap: 26px;
+  width: min(100%, 1300px);
 }
 
 .info-block--right {
@@ -317,16 +317,16 @@ h3 {
 
 .about-game-text {
   margin: 0;
-  max-width: 74ch;
+  max-width: 92ch;
   justify-self: stretch;
   text-align: right;
   color: #42484f;
-  line-height: 1.45;
+  line-height: 1.55;
   font-size: clamp(1.06rem, 1.45vw, 1.8rem);
 }
 
 .how-to-play-container {
-  width: min(100%, 860px);
+  width: min(100%, 1120px);
   margin: 0 auto;
 }
 
@@ -340,7 +340,7 @@ h3 {
 }
 
 .tutorial-placeholder {
-  width: min(100%, 1080px);
+  width: min(100%, 1280px);
   min-height: clamp(250px, 38vw, 430px);
   margin: 0;
   margin-left: auto;
@@ -358,8 +358,8 @@ h3 {
 @media (max-width: 768px) {
   .game-info-section {
     gap: 34px;
-    width: min(94%, 1100px);
-    padding-inline: 8px;
+    width: min(96%, 1240px);
+    padding-inline: clamp(10px, 3vw, 18px);
   }
 
   .info-block-heading {
@@ -377,6 +377,7 @@ h3 {
 
   .info-block {
     width: 100%;
+    gap: 20px;
   }
 
   .about-game-text {
@@ -385,6 +386,7 @@ h3 {
 
   .tutorial-placeholder {
     width: 100%;
+    
     min-height: clamp(220px, 46vw, 340px);
     border-radius: 24px;
   }
