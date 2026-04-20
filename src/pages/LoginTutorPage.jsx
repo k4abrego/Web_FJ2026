@@ -44,7 +44,7 @@ function LoginTutorPage() {
           <form
             id="tutor-login-form"
             className="login-form"
-            data-api-base="http://localhost:3000/api"
+            data-api-base="/"
             onSubmit={handleSubmit}
             noValidate
           >
