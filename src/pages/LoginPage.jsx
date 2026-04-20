@@ -1,9 +1,10 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 import SiteHeader from '../components/Header'
 
 function LoginPage() {
-  const [role, setRole] = useState(null)
+  const [searchParams] = useSearchParams()
+  const [role, setRole] = useState(searchParams.get('role') || null)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [message, setMessage] = useState('')
@@ -117,12 +118,12 @@ function LoginPage() {
                 </p>
               </form>
 
-              <p className="login-signup-prompt">
-                ¿No estás registrado aún?{' '}
-                <Link to="#" onClick={(e) => e.preventDefault()}>
-                  Presiona aquí para registrarte
-                </Link>
-              </p>
+              {role === 'tutor' && (
+                <p className="login-signup-prompt">
+                  ¿No estás registrado aún?{' '}
+                  <Link to="/registro">Presiona aquí para registrarte</Link>
+                </p>
+              )}
             </>
           )}
         </section>

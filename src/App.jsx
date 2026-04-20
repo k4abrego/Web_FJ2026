@@ -4,6 +4,7 @@ import ConocenosPage from './pages/ConocenosPage'
 import HomePage from './pages/HomePage'
 import LoginPage from './pages/LoginPage'
 import LoginTutorPage from './pages/LoginTutorPage'
+import RegistroPage from './pages/RegistroPage'
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <Route path="/contacto" element={<ContactoPage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/login-tutor" element={<LoginTutorPage />} />
+      <Route path="/registro" element={<RegistroPage />} />
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   )
