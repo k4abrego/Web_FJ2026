@@ -1,8 +1,11 @@
 import { useState } from 'react'
-import { Link, useSearchParams } from 'react-router-dom'
+import { Link, useNavigate, useSearchParams } from 'react-router-dom'
 import SiteHeader from '../components/Header'
 
+const API_URL = 'https://q623ldzsbzpk3j6nktpzcvqi7y0qrpsr.lambda-url.us-east-1.on.aws/login'
+
 function LoginPage() {
+  const navigate = useNavigate()
   const [searchParams] = useSearchParams()
   const [role, setRole] = useState(searchParams.get('role') || null)
   const [email, setEmail] = useState('')
@@ -11,7 +14,7 @@ function LoginPage() {
   const [status, setStatus] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault()
 
     if (!email || !password) {
@@ -27,8 +30,33 @@ function LoginPage() {
     }
 
     setIsSubmitting(true)
-    setStatus('is-success')
-    setMessage('Acceso correcto. Redirigiendo...')
+    setStatus('')
+    setMessage('')
+
+    try {
+      const response = await fetch(API_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password, deviceType: 'web' }),
+      })
+
+      const data = await response.json()
+
+      if (!response.ok) {
+        setStatus('is-error')
+        setMessage(data.error || data.message || 'Credenciales incorrectas.')
+        setIsSubmitting(false)
+        return
+      }
+
+      setStatus('is-success')
+      setMessage('Acceso correcto. Redirigiendo...')
+      setTimeout(() => navigate('/'), 1000)
+    } catch {
+      setStatus('is-error')
+      setMessage('Error de conexión. Intenta de nuevo.')
+      setIsSubmitting(false)
+    }
   }
 
   const handleBack = () => {

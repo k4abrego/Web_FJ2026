@@ -1,8 +1,11 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import SiteHeader from '../components/Header'
 
+const API_URL = 'https://q623ldzsbzpk3j6nktpzcvqi7y0qrpsr.lambda-url.us-east-1.on.aws/register_tutor'
+
 function RegistroPage() {
+  const navigate = useNavigate()
   const [nombre, setNombre] = useState('')
   const [apellidos, setApellidos] = useState('')
   const [email, setEmail] = useState('')
@@ -12,7 +15,7 @@ function RegistroPage() {
   const [status, setStatus] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault()
 
     if (!nombre || !apellidos || !email || !telefono || !password) {
@@ -28,8 +31,33 @@ function RegistroPage() {
     }
 
     setIsSubmitting(true)
-    setStatus('is-success')
-    setMessage('Cuenta creada exitosamente. Redirigiendo...')
+    setStatus('')
+    setMessage('')
+
+    try {
+      const response = await fetch(API_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: nombre, last_name: apellidos, email, number: telefono, password }),
+      })
+
+      const data = await response.json()
+
+      if (!response.ok) {
+        setStatus('is-error')
+        setMessage(data.error || data.message || 'Error al registrar. Intenta de nuevo.')
+        setIsSubmitting(false)
+        return
+      }
+
+      setStatus('is-success')
+      setMessage('Cuenta creada exitosamente. Redirigiendo...')
+      setTimeout(() => navigate('/login?role=tutor'), 1200)
+    } catch {
+      setStatus('is-error')
+      setMessage('Error de conexión. Intenta de nuevo.')
+      setIsSubmitting(false)
+    }
   }
 
   return (
