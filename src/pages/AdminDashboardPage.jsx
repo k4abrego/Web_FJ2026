@@ -40,7 +40,7 @@ function AdminDashboardPage() {
   }
 
   useEffect(() => {
-    if (?.role === 'admin') fetchSolicitudes()
+    if (session?.role === 'admin') fetchSolicitudes()
   }, [])
 
   if (!session || session.role !== 'admin') {
