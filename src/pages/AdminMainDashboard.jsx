@@ -2,6 +2,7 @@ import React from 'react'
 import SiteHeader from '../components/Header'
 import SideBar from '../components/SideBar'
 import ResumenGeneralWidget from '../components/ResumenGeneralWidget'
+import AtencionNecesariaWidget from '../components/AtencionNecesariaWidget'
 
 
 function AdminMainDashboard() {
@@ -12,8 +13,8 @@ function AdminMainDashboard() {
             <SideBar />
             <div className="admin-dashboard-grid">
                 <ResumenGeneralWidget/>
+                <AtencionNecesariaWidget/>
                 
-
             </div>
         </div>
     </>
