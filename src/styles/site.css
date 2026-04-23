@@ -1167,6 +1167,84 @@ h3 {
   opacity: 1;
 }
 
+.admin-dashboard-grid{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  padding: 24px;
+  width: 100%;
+}
+
+.dashboard-card{ 
+  background: #fff;
+  border-radius: 18px;
+  padding: 24px;
+  border: 2px solid #d7ecf8;
+  
+}
+
+.stat-item{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border-radius: 12px;
+  margin-bottom: 10px;
+  transition: transform 0.3s ease;
+}
+
+.stat-item:hover{
+  transform: scale(1.05);
+  transition: transform 0.3s ease-in-out;
+  
+}
+
+.stat-icon{
+  transform: scale(1.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: #fff;
+  border-radius: 100px;
+  margin-right: 20px;
+  /* background: #a72f2f; */
+
+}
+
+.stat-number{
+  font-size: 3rem;
+  font-weight: 700;
+  color: #165a87;
+}
+
+.stat-label{
+  font-size: 0.95rem;
+  color: #3d6a8a
+}
+
+.see-all-button{
+  background: #fff;
+  margin: 0 auto;
+  width: 70%;
+  text-align: center;
+  padding: 10px;
+  border-radius: 12px;
+  border: 1px solid black;
+  margin-top: 20px;
+  display: block;
+}
+
+
+
+
+
+
+
+
+
+
 @media (max-width: 600px) {
   .dashboard-table {
     font-size: 0.85rem;
