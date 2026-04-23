@@ -6,7 +6,7 @@ import LoginPage from './pages/LoginPage'
 import LoginTutorPage from './pages/LoginTutorPage'
 import RegistroPage from './pages/RegistroPage'
 import SolicitudVinculacionPage from './pages/SolicitudVinculacionPage'
-import AdminDashboardPage from './pages/AdminDashboardPage'
+import AdminDashboardSolicitudesPage from './pages/AdminDashboardPage'
 
 function App() {
   return (
@@ -18,7 +18,7 @@ function App() {
       <Route path="/login-tutor" element={<LoginTutorPage />} />
       <Route path="/registro" element={<RegistroPage />} />
       <Route path="/vincular-jugador" element={<SolicitudVinculacionPage />} />
-      <Route path="/admin" element={<AdminDashboardPage />} />
+      <Route path="/admin/solicitudes" element={<AdminDashboardSolicitudesPage />} />
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   )

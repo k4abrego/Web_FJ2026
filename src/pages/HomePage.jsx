@@ -3,6 +3,7 @@ import UnityCanvas from '../components/UnityCanvas'
 import GameInfo from '../components/GameInfo'
 import { Link } from 'react-router-dom'
 
+
 function HomePage() {
   return (
     <>

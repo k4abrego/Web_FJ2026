@@ -50,7 +50,7 @@ function SiteHeader({ compact = false }) {
               )}
               {session?.role === 'admin' && (
                 <li>
-                  <NavLink to="/admin">Dashboard</NavLink>
+                  <NavLink to="/admin/solicitudes">Dashboard</NavLink>
                 </li>
               )}
               <li>

@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Link, useNavigate, useSearchParams } from 'react-router-dom'
 import SiteHeader from '../components/Header'
 
-const API_URL = 'https://q623ldzsbzpk3j6nktpzcvqi7y0qrpsr.lambda-url.us-east-1.on.aws/login_tutor_admin'
+const API_URL = `${import.meta.env.VITE_API_URL}/login_tutor_admin`
 
 function LoginPage() {
   const navigate = useNavigate()

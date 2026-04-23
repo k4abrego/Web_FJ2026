@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import SiteHeader from '../components/Header'
+import SideBar from '../components/SideBar'
 
-const API_BASE = 'https://q623ldzsbzpk3j6nktpzcvqi7y0qrpsr.lambda-url.us-east-1.on.aws'
+const API_BASE = import.meta.env.VITE_API_URL
 
 const ESTADO_LABEL = {
   pendiente: 'Pendiente',
@@ -10,7 +11,7 @@ const ESTADO_LABEL = {
   rechazada: 'Rechazada',
 }
 
-function AdminDashboardPage() {
+function AdminDashboardSolicitudesPage() {
   const navigate = useNavigate()
   const session = JSON.parse(localStorage.getItem('session') || 'null')
 
@@ -132,106 +133,109 @@ function AdminDashboardPage() {
     <>
       <SiteHeader />
 
-      <main className="dashboard-main">
-        <div className="dashboard-container">
-          <h1>Panel de Administración</h1>
-          <p className="dashboard-subtitle">
-            Gestiona las solicitudes de vinculación entre tutores y jugadores.
-          </p>
+      <div style={{ display: 'flex' }}>
+      <SideBar />
+        <main className="dashboard-main">
+          <div className="dashboard-container">
+            <h1>Panel de Administración</h1>
+            <p className="dashboard-subtitle">
+              Gestiona las solicitudes de vinculación entre tutores y jugadores.
+            </p>
 
-          {loading && <p className="dashboard-status">Cargando solicitudes...</p>}
-          {error && <p className="dashboard-status is-error">{error}</p>}
+            {loading && <p className="dashboard-status">Cargando solicitudes...</p>}
+            {error && <p className="dashboard-status is-error">{error}</p>}
 
-          {!loading && !error && (
-            <>
-              <section className="dashboard-section">
-                <h2>Solicitudes pendientes ({pendientes.length})</h2>
-                {pendientes.length === 0 ? (
-                  <p className="dashboard-empty">No hay solicitudes pendientes.</p>
-                ) : (
-                  <div className="dashboard-table-wrap">
-                    <table className="dashboard-table">
-                      <thead>
-                        <tr>
-                          <th>ID</th>
-                          <th>Tutor</th>
-                          <th>Jugador</th>
-                          <th>Parentesco</th>
-                          <th>Fecha</th>
-                          <th>Acciones</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {pendientes.map((s) => (
-                          <tr key={s.id_solicitud}>
-                            <td>{s.id_solicitud}</td>
-                            <td>{s.tutor_nombre} {s.tutor_apellidos}</td>
-                            <td>{s.jugador_nombre} {s.jugador_apellidos} <span className="id-badge">ID {s.id_jugador}</span></td>
-                            <td>{s.parentezco}</td>
-                            <td>{new Date(s.fecha_solicitud).toLocaleDateString('es-MX')}</td>
-                            <td className="action-cell">
-                              <button
-                                className="btn-accept"
-                                disabled={actionLoading === s.id_solicitud}
-                                onClick={() => handleAceptar(s)}
-                              >
-                                {actionLoading === s.id_solicitud ? '...' : 'Aceptar'}
-                              </button>
-                              <button
-                                className="btn-reject"
-                                disabled={actionLoading === s.id_solicitud}
-                                onClick={() => openRechazo(s)}
-                              >
-                                Rechazar
-                              </button>
-                            </td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
-                )}
-              </section>
-
-              {resueltas.length > 0 && (
+            {!loading && !error && (
+              <>
                 <section className="dashboard-section">
-                  <h2>Historial</h2>
-                  <div className="dashboard-table-wrap">
-                    <table className="dashboard-table">
-                      <thead>
-                        <tr>
-                          <th>ID</th>
-                          <th>Tutor</th>
-                          <th>Jugador</th>
-                          <th>Parentesco</th>
-                          <th>Estado</th>
-                          <th>Motivo</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {resueltas.map((s) => (
-                          <tr key={s.id_solicitud} className={s.estado === 'aceptada' ? 'row-accepted' : 'row-rejected'}>
-                            <td>{s.id_solicitud}</td>
-                            <td>{s.tutor_nombre} {s.tutor_apellidos}</td>
-                            <td>{s.jugador_nombre} {s.jugador_apellidos}</td>
-                            <td>{s.parentezco}</td>
-                            <td>
-                              <span className={`estado-badge estado-${s.estado}`}>
-                                {ESTADO_LABEL[s.estado]}
-                              </span>
-                            </td>
-                            <td>{s.motivo_rechazo || '—'}</td>
+                  <h2>Solicitudes pendientes ({pendientes.length})</h2>
+                  {pendientes.length === 0 ? (
+                    <p className="dashboard-empty">No hay solicitudes pendientes.</p>
+                  ) : (
+                    <div className="dashboard-table-wrap">
+                      <table className="dashboard-table">
+                        <thead>
+                          <tr>
+                            <th>ID</th>
+                            <th>Tutor</th>
+                            <th>Jugador</th>
+                            <th>Parentesco</th>
+                            <th>Fecha</th>
+                            <th>Acciones</th>
                           </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
+                        </thead>
+                        <tbody>
+                          {pendientes.map((s) => (
+                            <tr key={s.id_solicitud}>
+                              <td>{s.id_solicitud}</td>
+                              <td>{s.tutor_nombre} {s.tutor_apellidos}</td>
+                              <td>{s.jugador_nombre} {s.jugador_apellidos} <span className="id-badge">ID {s.id_jugador}</span></td>
+                              <td>{s.parentezco}</td>
+                              <td>{new Date(s.fecha_solicitud).toLocaleDateString('es-MX')}</td>
+                              <td className="action-cell">
+                                <button
+                                  className="btn-accept"
+                                  disabled={actionLoading === s.id_solicitud}
+                                  onClick={() => handleAceptar(s)}
+                                >
+                                  {actionLoading === s.id_solicitud ? '...' : 'Aceptar'}
+                                </button>
+                                <button
+                                  className="btn-reject"
+                                  disabled={actionLoading === s.id_solicitud}
+                                  onClick={() => openRechazo(s)}
+                                >
+                                  Rechazar
+                                </button>
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  )}
                 </section>
-              )}
-            </>
-          )}
-        </div>
-      </main>
+
+                {resueltas.length > 0 && (
+                  <section className="dashboard-section">
+                    <h2>Historial</h2>
+                    <div className="dashboard-table-wrap">
+                      <table className="dashboard-table">
+                        <thead>
+                          <tr>
+                            <th>ID</th>
+                            <th>Tutor</th>
+                            <th>Jugador</th>
+                            <th>Parentesco</th>
+                            <th>Estado</th>
+                            <th>Motivo</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {resueltas.map((s) => (
+                            <tr key={s.id_solicitud} className={s.estado === 'aceptada' ? 'row-accepted' : 'row-rejected'}>
+                              <td>{s.id_solicitud}</td>
+                              <td>{s.tutor_nombre} {s.tutor_apellidos}</td>
+                              <td>{s.jugador_nombre} {s.jugador_apellidos}</td>
+                              <td>{s.parentezco}</td>
+                              <td>
+                                <span className={`estado-badge estado-${s.estado}`}>
+                                  {ESTADO_LABEL[s.estado]}
+                                </span>
+                              </td>
+                              <td>{s.motivo_rechazo || '—'}</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  </section>
+                )}
+              </>
+            )}
+          </div>
+        </main>
+      </div>
 
       {rechazoModal && (
         <div className="modal-overlay" onClick={() => setRechazoModal(null)}>
@@ -268,4 +272,4 @@ function AdminDashboardPage() {
   )
 }
 
-export default AdminDashboardPage
+export default AdminDashboardSolicitudesPage
