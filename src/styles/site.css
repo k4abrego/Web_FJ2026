@@ -1179,8 +1179,8 @@ h3 {
   background: #fff;
   border-radius: 18px;
   padding: 24px;
-  border: 2px solid #d7ecf8;
-  
+  border: 2px solid #d7ecf8;  
+  font-family: sans-serif;
 }
 
 .stat-item{
@@ -1191,6 +1191,48 @@ h3 {
   border-radius: 12px;
   margin-bottom: 10px;
   transition: transform 0.3s ease;
+}
+
+
+.alert-item{
+  display: flex;
+  gap: 12px;
+  padding: 14px;
+  border-radius: 12px;
+  border: 1px solid #e8f1fa;
+  margin-bottom: 10px;
+}
+
+.alert-item img{
+  max-height: 44px;
+  border-radius: 100px;
+  background: #3f3a3a;
+  
+}
+
+.atencion-info{
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.alert-name{
+  color: black;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.alert-badge{
+  font-size: 1rem;
+  font-weight: 500;
+  color: red;
+}
+
+.atencion-info p {
+  color: black;
+  font-size: 0.8rem;
+  font-weight: 500;
+  margin: 0;
 }
 
 .stat-item:hover{
@@ -1236,11 +1278,22 @@ h3 {
   display: block;
 }
 
+.atencion-header{
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
 
-
-
-
-
+.atencion-alert{
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  width: 40px;
+  height: 40px;
+  background-color: rgba(255, 0, 0, 0.23);
+  border-radius: 300px;
+  color: red;
+}
 
 
 
