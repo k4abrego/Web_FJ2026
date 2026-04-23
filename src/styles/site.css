@@ -1296,7 +1296,70 @@ h3 {
 }
 
 
+.progreso-container{
+  grid-column: span 2;
+  background: #fff;
+  border-radius: 18px;
+  padding: 24px;
+  border: 2px solid #d7ecf8;  
+  font-family: sans-serif;
+}
 
+
+
+.progreso-header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.progreso-actions{
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.progreso-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.progreso-table th {
+  padding: 10px 14px;
+  font-size: 0.8rem;
+  color: black;
+  font-weight: 600;
+  text-transform: uppercase;
+  border-bottom: 1px solid #e8f1fa;
+}
+
+.progreso-table th,
+.progreso-table td {
+  text-align: center;
+}
+
+.student-name-cell{
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.student-avatar{
+  max-height: 30px;
+  background-color: rgb(49, 74, 70);
+  border-radius: 50%
+
+}
+
+.score-badge{
+  background: #e8f5e9;
+  color: #2e7d32;
+  padding: 4px 10px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 0.85rem;
+}
 
 @media (max-width: 600px) {
   .dashboard-table {
