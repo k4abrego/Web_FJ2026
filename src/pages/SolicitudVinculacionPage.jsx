@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import SiteHeader from '../components/Header'
 
-const API_URL = 'https://q623ldzsbzpk3j6nktpzcvqi7y0qrpsr.lambda-url.us-east-1.on.aws/solicitud_vinculacion'
+const API_URL = `${import.meta.env.VITE_API_URL }/solicitud_vinculacion`
 
 const PARENTEZCO_OPTIONS = [
   { value: '', label: 'Selecciona una opción' },
