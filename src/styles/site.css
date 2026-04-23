@@ -1180,7 +1180,7 @@ h3 {
   border-radius: 18px;
   padding: 24px;
   border: 2px solid #d7ecf8;  
-  font-family: sans-serif;
+  /* font-family: sans-serif; */
 }
 
 .stat-item{
@@ -1207,7 +1207,6 @@ h3 {
   max-height: 44px;
   border-radius: 100px;
   background: #3f3a3a;
-  
 }
 
 .atencion-info{
@@ -1302,7 +1301,7 @@ h3 {
   border-radius: 18px;
   padding: 24px;
   border: 2px solid #d7ecf8;  
-  font-family: sans-serif;
+  /* font-family: sans-serif; */
 }
 
 
@@ -1331,11 +1330,16 @@ h3 {
   font-weight: 600;
   text-transform: uppercase;
   border-bottom: 1px solid #e8f1fa;
+  border-spacing: 20px;
 }
 
 .progreso-table th,
 .progreso-table td {
   text-align: center;
+}
+
+.progreso-table td{
+  padding: 16px 14px;
 }
 
 .student-name-cell{
@@ -1351,6 +1355,8 @@ h3 {
   border-radius: 50%
 
 }
+
+
 
 .score-badge{
   background: #e8f5e9;
