@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import SiteHeader from '../components/Header'
 import SideBar from '../components/SideBar'
@@ -22,27 +22,31 @@ function AdminDashboardSolicitudesPage() {
   const [rechazoModal, setRechazoModal] = useState(null)
   const [motivoRechazo, setMotivoRechazo] = useState('')
 
-  const fetchSolicitudes = async () => {
-    setLoading(true)
-    setError('')
-    try {
-      const res = await fetch(`${API_BASE}/solicitudes_vinculacion`)
-      const data = await res.json()
-      if (!res.ok) {
-        setError(data.error || 'Error al obtener solicitudes.')
-        return
-      }
-      setSolicitudes(data.solicitudes || [])
-    } catch {
-      setError('Error de conexión.')
-    } finally {
-      setLoading(false)
-    }
-  }
+  
 
-  useEffect(() => {
-    if (session?.role === 'admin') fetchSolicitudes()
+  const fetchSolicitudes = useCallback(async (isRefresh = false) => {
+      if (isRefresh) {
+        setLoading(true)
+        setError('')
+      }
+      try {
+          const res = await fetch(`${API_BASE}/solicitudes_vinculacion`)
+          const data = await res.json()
+          if (!res.ok) {
+              setError(data.error || 'Error al obtener solicitudes.')
+              return
+          }
+          setSolicitudes(data.solicitudes || [])
+      } catch {
+          setError('Error de conexión.')
+      } finally {
+          setLoading(false)
+      }
   }, [])
+  useEffect(() => {
+      if (session?.role === 'admin') fetchSolicitudes()
+  }, [fetchSolicitudes])
+
 
   if (!session || session.role !== 'admin') {
     return (
@@ -81,7 +85,7 @@ function AdminDashboardSolicitudesPage() {
       if (!res.ok) {
         alert(data.error || 'Error al aceptar.')
       }
-      await fetchSolicitudes()
+      await fetchSolicitudes(true)
     } catch {
       alert('Error de conexión.')
     } finally {
@@ -118,7 +122,7 @@ function AdminDashboardSolicitudesPage() {
       if (!res.ok) {
         alert(data.error || 'Error al rechazar.')
       }
-      await fetchSolicitudes()
+      await fetchSolicitudes(true)
     } catch {
       alert('Error de conexión.')
     } finally {

@@ -4,6 +4,7 @@ import SideBar from '../components/SideBar'
 import ResumenGeneralWidget from '../components/ResumenGeneralWidget'
 import AtencionNecesariaWidget from '../components/AtencionNecesariaWidget'
 import ProgresoEstudiantes from '../components/ProgresoEstudiantes'
+import IslasProgresoWidget from '../components/IslasProgresoWidget'
 
 function AdminMainDashboard() {
   return (
@@ -15,6 +16,8 @@ function AdminMainDashboard() {
                 <ResumenGeneralWidget/>
                 <AtencionNecesariaWidget/>
                 <ProgresoEstudiantes/>
+                <IslasProgresoWidget/>
+                
                 
             </div>
         </div>
