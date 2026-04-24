@@ -105,7 +105,7 @@ function TutorMainDashboard() {
         }
       }
 
-      setError('No se pudo cargar el dashboard de tutor. Verifica el endpoint del servicio Node.')
+      setError('No se pudo cargar el dashboard de tutor.')
       setLoading(false)
     }
 
@@ -134,9 +134,9 @@ function TutorMainDashboard() {
   const tips = dashboardData.tips.length > 0
     ? dashboardData.tips
     : [
-        'Practica 10 minutos diarios en la isla con menor precision.',
+        'Practica 10 minutos diarios en la isla con menor precisión.',
         'Refuerza operaciones de resta con ejercicios fuera de plataforma.',
-        'Reconoce mejoras semanales para mantener motivacion.',
+        'Reconoce mejoras semanales pra mantener motivacion.',
       ]
 
   const badges = dashboardData.badges.length > 0
@@ -150,8 +150,8 @@ function TutorMainDashboard() {
   const timeline = dashboardData.timeline.length > 0
     ? dashboardData.timeline
     : [
-        { fecha: 'Hoy', titulo: 'Evaluacion de suma', detalle: 'Nuevo avance registrado en la ultima semana.' },
-        { fecha: 'Ayer', titulo: 'Mejora en resta', detalle: 'Aumento de precision frente a la semana anterior.' },
+        { fecha: 'Hoy', titulo: 'Evaluacion de suma', detalle: 'Nuevo avance registrado en la última semana.' },
+        { fecha: 'Ayer', titulo: 'Mejora en resta', detalle: 'Aumento de precisión frente a la semana anterior.' },
       ]
 
   if (!session || session.role !== 'tutor') {
@@ -161,9 +161,9 @@ function TutorMainDashboard() {
         <main className="min-h-[calc(100vh-140px)] bg-slate-100 px-4 py-10 sm:px-6 lg:px-8">
           <section className="mx-auto flex max-w-xl flex-col items-center rounded-[2rem] bg-white p-8 text-center shadow-[0_20px_60px_rgba(15,23,42,0.08)] ring-1 ring-slate-200/70">
             <p className="text-sm font-semibold uppercase tracking-[0.28em] text-sky-500">Acceso restringido</p>
-            <h1 className="mt-4 text-3xl font-semibold tracking-tight text-slate-900">Debes iniciar sesion como tutor</h1>
+            <h1 className="mt-4 text-3xl font-semibold tracking-tight text-slate-900">Debes iniciar sesión como tutor</h1>
             <p className="mt-3 max-w-md text-sm leading-6 text-slate-600">
-              Inicia sesion con una cuenta de tutor para ver el panel de progreso, habilidades e insignias.
+              Inicia sesión con una cuenta de tutor para ver el panel de progreso.
             </p>
             <Link
               to="/login?role=tutor"
@@ -191,8 +191,7 @@ function TutorMainDashboard() {
                   {dashboardData.summary.tutorNombre}
                 </h1>
                 <p className="mt-3 max-w-2xl text-sm leading-6 text-slate-600 sm:text-base">
-                  Resumen en tiempo real del avance de tus jugadores vinculados. Esta vista sigue la logica del admin,
-                  pero con datos de tutor, progreso y seguimiento pedagógico.
+                  Resumen en tiempo real del avance de los usuarios vinculados.
                 </p>
               </div>
 
@@ -261,11 +260,11 @@ function TutorMainDashboard() {
                     <div>
                       <h2 className="text-xl font-semibold tracking-tight text-slate-900">Velocidad de Progreso</h2>
                       <p className="mt-1 text-sm text-slate-600">
-                        Promedio de crecimiento de puntuacion en las ultimas semanas.
+                        Promedio de crecimiento de puntuación en las últimas semanas.
                       </p>
                     </div>
                     <div className="rounded-full bg-slate-100 px-4 py-2 text-xs font-semibold text-slate-600">
-                      Puntuacion y participacion
+                      Puntuación y participación
                     </div>
                   </div>
                   <div className="h-[260px]">
@@ -290,7 +289,7 @@ function TutorMainDashboard() {
 
                 <article className="rounded-[1.5rem] bg-white p-5 shadow-[0_16px_45px_rgba(15,23,42,0.07)] ring-1 ring-slate-200/70">
                   <h2 className="text-xl font-semibold tracking-tight text-slate-900">Habilidades</h2>
-                  <p className="mt-1 text-sm text-slate-600">Precision por tema en actividades y preguntas.</p>
+                  <p className="mt-1 text-sm text-slate-600">Precisión por tema en actividades y preguntas.</p>
                   <div className="mt-4 h-[300px]">
                     <ResponsiveContainer width="100%" height="100%">
                       <RadarChart cx="50%" cy="50%" outerRadius="70%" data={radarData}>
