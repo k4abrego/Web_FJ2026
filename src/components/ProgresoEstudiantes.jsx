@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 const estudiantes = [
   {
     id: 1,
-    nombre: "Jossian Garcia",
+    nombre: "Jossian Aguilar",
     foto: "Jossian.png",
     score: 450,
     ultimaActividad: "3 días ago",
