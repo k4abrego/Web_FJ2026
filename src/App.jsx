@@ -8,6 +8,7 @@ import RegistroPage from './pages/RegistroPage'
 import SolicitudVinculacionPage from './pages/SolicitudVinculacionPage'
 import AdminDashboardSolicitudesPage from './pages/AdminSolicitudes'
 import AdminMainDashboard from './pages/AdminMainDashboard'
+import TutorMainDashboard from './pages/TutorMainDashboard'
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
       <Route path="/login-tutor" element={<LoginTutorPage />} />
       <Route path="/registro" element={<RegistroPage />} />
       <Route path="/vincular-jugador" element={<SolicitudVinculacionPage />} />
+      <Route path="/tutor/dashboard" element={<TutorMainDashboard />} />
       <Route path="/admin/solicitudes" element={<AdminDashboardSolicitudesPage />} />
       <Route path="*" element={<Navigate to="/" replace />} />
       <Route path= "/admin/dashboard" element={<AdminMainDashboard/>}/>
