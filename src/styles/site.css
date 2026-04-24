@@ -1187,6 +1187,61 @@ h3 {
   margin: 0 0 8px;
 }
 
+.info-tooltip-wrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  margin-left: 6px;
+  cursor: pointer;
+}
+
+.info-tooltip-icon {
+  font-size: 1.1rem !important;
+  color: #8bb8d6;
+  transition: color 0.2s;
+}
+
+.info-tooltip-wrapper:hover .info-tooltip-icon {
+  color: #165a87;
+}
+
+.info-tooltip-box {
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  left: 50%;
+  top: calc(100% + 8px);
+  transform: translateX(-50%);
+  background: #1a3a52;
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 400;
+  line-height: 1.4;
+  padding: 8px 12px;
+  border-radius: 8px;
+  width: max-content;
+  max-width: 220px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  transition: opacity 0.2s, visibility 0.2s;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.info-tooltip-box::before {
+  content: '';
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 6px solid transparent;
+  border-bottom-color: #1a3a52;
+}
+
+.info-tooltip-wrapper:hover .info-tooltip-box {
+  visibility: visible;
+  opacity: 1;
+}
+
 .stat-item{
   display: flex;
   align-items: center;
@@ -1212,6 +1267,19 @@ h3 {
   border-radius: 100px;
   background: #d7ecf8;
   object-fit: cover;
+}
+
+.alert-avatar{
+  min-width: 44px;
+  height: 44px;
+  border-radius: 100px;
+  background: #d7ecf8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: #165a87;
 }
 
 .atencion-info{
@@ -1240,7 +1308,7 @@ h3 {
 }
 
 .stat-item:hover{
-  transform: scale(1.05);
+  transform: scale(1.02);
   transition: transform 0.3s ease-in-out;
   
 }
@@ -1531,6 +1599,7 @@ progress::-moz-progress-bar {
 .skeleton-line--title {
   width: 70%;
   height: 18px;
+  margin-bottom: 10px;
 }
 
 .skeleton-line--data {
@@ -1542,6 +1611,48 @@ progress::-moz-progress-bar {
 .skeleton-line--bar {
   width: 100%;
   height: 12px;
+}
+
+.skeleton-stat-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  background: #eaf4fb;
+}
+
+.skeleton-circle {
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+  border-radius: 50%;
+  background: linear-gradient(
+    90deg,
+    #d7ecf8 25%,
+    #eaf4fb 50%,
+    #d7ecf8 75%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.5s ease-in-out infinite;
+}
+
+.skeleton-line--number {
+  width: 60px;
+  height: 28px;
+}
+
+.skeleton-line--label {
+  width: 120px;
+  height: 14px;
+}
+
+.skeleton-line--button {
+  width: 70%;
+  height: 38px;
+  border-radius: 10px;
+  margin: 12px auto 0;
 }
 
 .error-alert{
