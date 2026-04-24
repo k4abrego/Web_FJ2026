@@ -2,7 +2,8 @@ import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import SiteHeader from '../components/Header'
 
-const API_URL = `${import.meta.env.VITE_API_URL}/register_tutor`
+const API_BASE = (import.meta.env.VITE_API_URL || 'http://localhost:3000').replace(/\/$/, '')
+const API_URL = `${API_BASE}/register_tutor`
 
 function RegistroPage() {
   const navigate = useNavigate()
@@ -41,11 +42,12 @@ function RegistroPage() {
         body: JSON.stringify({ name: nombre, last_name: apellidos, email, number: telefono, password }),
       })
 
-      const data = await response.json()
+      const isJson = (response.headers.get('content-type') || '').includes('application/json')
+      const data = isJson ? await response.json() : {}
 
       if (!response.ok) {
         setStatus('is-error')
-        setMessage(data.error || data.message || 'Error al registrar. Intenta de nuevo.')
+        setMessage(data.error || data.message || `Error al registrar (HTTP ${response.status}).`)
         setIsSubmitting(false)
         return
       }

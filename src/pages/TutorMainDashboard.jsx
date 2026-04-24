@@ -1,27 +1,21 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Canvas, useFrame } from '@react-three/fiber'
-import {
-  Line,
-  LineChart,
-  PolarAngleAxis,
-  PolarGrid,
-  Radar,
-  RadarChart,
-  ResponsiveContainer,
-  Tooltip,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-} from 'recharts'
+import * as Recharts from 'recharts'
 import SiteHeader from '../components/Header'
 
-const API_BASE = import.meta.env.VITE_API_URL
+const API_BASE = (import.meta.env.VITE_API_URL || 'http://localhost:3000').replace(/\/$/, '')
 
 const EMPTY_DASHBOARD = {
+  profile: {
+    alias: 'Goku123',
+    alumnoNombre: 'Juan Valdez Montes',
+    tutorNombre: 'Gianna Montes',
+    cumpleanios: '09/04',
+    avatarUrl: '/assets/pfps/Roman.png',
+  },
   summary: {
     tutorNombre: 'Tutor',
-    totalJugadores: 0,
     promedioScore: 0,
     totalPartidas: 0,
   },
@@ -32,20 +26,75 @@ const EMPTY_DASHBOARD = {
   badges: [],
 }
 
-function FloatingBadge() {
+const DEFAULT_WEEKLY_PROGRESS = [
+  { semana: 'Semana 1', puntaje: 310, participacion: 330 },
+  { semana: 'Semana 2', puntaje: 390, participacion: 380 },
+  { semana: 'Semana 3', puntaje: 500, participacion: 430 },
+  { semana: 'Actual', puntaje: 580, participacion: 450 },
+]
+
+const DEFAULT_TOPIC_ACCURACY = [
+  { habilidad: 'Sumas', precision: 90 },
+  { habilidad: 'Restas', precision: 80 },
+  { habilidad: 'Multiplicacion', precision: 88 },
+  { habilidad: 'Fracciones', precision: 55 },
+  { habilidad: 'Divisiones', precision: 62 },
+]
+
+const DEFAULT_TIPS = [
+  'Para la isla multiplicacion: practica tablas del 7 y 8 fuera de la plataforma.',
+  'Para la isla de resta: revisa restas con decimales dos veces por semana.',
+  'Ha mejorado en su area de enfoque de -15% a +5% este mes.',
+]
+
+const DEFAULT_BADGES = [
+  { nombre: 'Maestro de las Sumas', valor: 'Top del mes', icon: '⭐' },
+  { nombre: 'Resta Veloz', valor: 'Racha 10', icon: '⚡' },
+  { nombre: 'Multiplicacion Precisa', valor: 'x3', icon: '🎯' },
+  { nombre: 'Solucionador de Fracciones', valor: 'Nivel pro', icon: '➗' },
+]
+
+const DEFAULT_TIMELINE = [
+  {
+    fecha: 'OCT 10',
+    titulo: 'Evaluacion Intermedia: Habilidades de Suma',
+    detalle: 'Mejora significativa en velocidad y precision. Puntuacion de suma: 530 pts.',
+    extra: '+40 Ptos.',
+  },
+  {
+    fecha: 'SEP 12',
+    titulo: 'Evaluacion de Referencia: Operaciones Basicas',
+    detalle: 'Puntuacion de resta: 410 pts. Nivel basico.',
+    extra: '',
+  },
+  {
+    fecha: 'AGO 28',
+    titulo: 'Progreso de la Isla de Fracciones',
+    detalle: 'Identificacion de fracciones simples. Puntuacion de fracciones: 380 pts.',
+    extra: '',
+  },
+]
+
+function BadgeCrystal() {
   const meshRef = useRef(null)
 
-  useFrame(({ clock }, delta) => {
+  useFrame((_, delta) => {
     if (!meshRef.current) return
-    meshRef.current.rotation.y += delta * 0.6
-    meshRef.current.rotation.x = Math.sin(clock.elapsedTime * 1.2) * 0.18
+    meshRef.current.rotation.y += delta * 0.52
+    meshRef.current.rotation.x += delta * 0.15
   })
 
   return (
-    <mesh ref={meshRef}>
-      <octahedronGeometry args={[1.05, 0]} />
-      <meshStandardMaterial color="#38bdf8" metalness={0.45} roughness={0.25} />
-    </mesh>
+    <group ref={meshRef}>
+      <mesh>
+        <octahedronGeometry args={[0.88, 0]} />
+        <meshStandardMaterial color="#7b359e" metalness={0.66} roughness={0.22} />
+      </mesh>
+      <mesh scale={1.25}>
+        <torusGeometry args={[0.95, 0.1, 16, 40]} />
+        <meshStandardMaterial color="#7ab7d8" metalness={0.3} roughness={0.46} />
+      </mesh>
+    </group>
   )
 }
 
@@ -53,11 +102,18 @@ function normalizeDashboardResponse(raw) {
   if (!raw || typeof raw !== 'object') return EMPTY_DASHBOARD
 
   const summarySource = raw.summary || raw.kpis || {}
+  const profileSource = raw.profile || raw.student || {}
 
   return {
+    profile: {
+      alias: profileSource.alias || profileSource.nickname || EMPTY_DASHBOARD.profile.alias,
+      alumnoNombre: profileSource.alumnoNombre || profileSource.student_name || EMPTY_DASHBOARD.profile.alumnoNombre,
+      tutorNombre: profileSource.tutorNombre || profileSource.parent_name || EMPTY_DASHBOARD.profile.tutorNombre,
+      cumpleanios: profileSource.cumpleanios || profileSource.birthday || EMPTY_DASHBOARD.profile.cumpleanios,
+      avatarUrl: profileSource.avatarUrl || profileSource.avatar || EMPTY_DASHBOARD.profile.avatarUrl,
+    },
     summary: {
       tutorNombre: summarySource.tutorNombre || summarySource.tutor_nombre || 'Tutor',
-      totalJugadores: Number(summarySource.totalJugadores ?? summarySource.total_jugadores ?? 0),
       promedioScore: Number(summarySource.promedioScore ?? summarySource.promedio_score_global ?? 0),
       totalPartidas: Number(summarySource.totalPartidas ?? summarySource.total_partidas ?? 0),
     },
@@ -86,7 +142,6 @@ function TutorMainDashboard() {
       setError('')
 
       const endpoints = [
-        `${API_BASE}/tutor_dashboard/${session.id_cuenta}`,
         `${API_BASE}/dashboard_tutor/${session.id_cuenta}`,
       ]
 
@@ -101,11 +156,11 @@ function TutorMainDashboard() {
           setLoading(false)
           return
         } catch {
-          // Try the next endpoint.
+          // Try the next endpoint
         }
       }
 
-      setError('No se pudo cargar el dashboard de tutor.')
+      //setError('No se pudo cargar el dashboard de padre/tutor')
       setLoading(false)
     }
 
@@ -113,63 +168,47 @@ function TutorMainDashboard() {
   }, [session?.id_cuenta, session?.role])
 
   const lineData = useMemo(
-    () =>
-      dashboardData.weeklyProgress.map((item, index) => ({
+    () => {
+      if (!dashboardData.weeklyProgress.length) return DEFAULT_WEEKLY_PROGRESS
+      return dashboardData.weeklyProgress.map((item, index) => ({
         semana: item.semana || item.etiqueta || `Semana ${index + 1}`,
         puntaje: Number(item.puntaje || item.puntaje_promedio || item.score || 0),
         participacion: Number(item.participacion || item.participation || 0),
-      })),
+      }))
+    },
     [dashboardData.weeklyProgress],
   )
 
   const radarData = useMemo(
-    () =>
-      dashboardData.topicAccuracy.map((item) => ({
+    () => {
+      if (!dashboardData.topicAccuracy.length) return DEFAULT_TOPIC_ACCURACY
+      return dashboardData.topicAccuracy.map((item) => ({
         habilidad: item.tema || item.habilidad || 'Tema',
         precision: Number(item.precision_pct || item.precision || 0),
-      })),
+      }))
+    },
     [dashboardData.topicAccuracy],
   )
 
-  const tips = dashboardData.tips.length > 0
-    ? dashboardData.tips
-    : [
-        'Practica 10 minutos diarios en la isla con menor precisión.',
-        'Refuerza operaciones de resta con ejercicios fuera de plataforma.',
-        'Reconoce mejoras semanales pra mantener motivacion.',
-      ]
-
-  const badges = dashboardData.badges.length > 0
-    ? dashboardData.badges
-    : [
-        { nombre: 'Racha Activa', valor: '10 dias', color: 'bg-emerald-500' },
-        { nombre: 'Suma Veloz', valor: '+20%', color: 'bg-sky-500' },
-        { nombre: 'Fracciones', valor: '+15%', color: 'bg-amber-500' },
-      ]
-
-  const timeline = dashboardData.timeline.length > 0
-    ? dashboardData.timeline
-    : [
-        { fecha: 'Hoy', titulo: 'Evaluacion de suma', detalle: 'Nuevo avance registrado en la última semana.' },
-        { fecha: 'Ayer', titulo: 'Mejora en resta', detalle: 'Aumento de precisión frente a la semana anterior.' },
-      ]
+  const tips = dashboardData.tips.length > 0 ? dashboardData.tips : DEFAULT_TIPS
+  const badges = dashboardData.badges.length > 0 ? dashboardData.badges : DEFAULT_BADGES
+  const timeline = dashboardData.timeline.length > 0 ? dashboardData.timeline : DEFAULT_TIMELINE
+  const profile = dashboardData.profile || EMPTY_DASHBOARD.profile
+  const tutorAlias = profile.alias || session?.correo?.split('@')?.[0] || EMPTY_DASHBOARD.profile.alias
 
   if (!session || session.role !== 'tutor') {
     return (
       <>
         <SiteHeader />
-        <main className="min-h-[calc(100vh-140px)] bg-slate-100 px-4 py-10 sm:px-6 lg:px-8">
-          <section className="mx-auto flex max-w-xl flex-col items-center rounded-[2rem] bg-white p-8 text-center shadow-[0_20px_60px_rgba(15,23,42,0.08)] ring-1 ring-slate-200/70">
-            <p className="text-sm font-semibold uppercase tracking-[0.28em] text-sky-500">Acceso restringido</p>
-            <h1 className="mt-4 text-3xl font-semibold tracking-tight text-slate-900">Debes iniciar sesión como tutor</h1>
-            <p className="mt-3 max-w-md text-sm leading-6 text-slate-600">
-              Inicia sesión con una cuenta de tutor para ver el panel de progreso.
+        <main className="tutor-dashboard-page">
+          <section className="tutor-restricted-card">
+            <p className="tutor-restricted-kicker">Acceso restringido</p>
+            <h1>Debes iniciar sesión como padre/tutor</h1>
+            <p>
+              Inicia sesión con una cuenta de padre/tutor para ver el panel de progreso.
             </p>
-            <Link
-              to="/login?role=tutor"
-              className="mt-6 inline-flex items-center justify-center rounded-full bg-slate-900 px-5 py-3 text-sm font-semibold text-white transition hover:bg-slate-700"
-            >
-              Iniciar sesion
+            <Link to="/login?role=tutor" className="tutor-restricted-action">
+              Iniciar sesión
             </Link>
           </section>
         </main>
@@ -181,187 +220,159 @@ function TutorMainDashboard() {
     <>
       <SiteHeader />
 
-      <main className="min-h-screen bg-gradient-to-b from-sky-50 via-white to-slate-100 px-4 py-6 sm:px-6 lg:px-8">
-        <div className="mx-auto flex max-w-7xl flex-col gap-5">
-          <section className="grid gap-5 rounded-[2rem] bg-white/90 p-5 shadow-[0_20px_60px_rgba(15,23,42,0.08)] ring-1 ring-slate-200/70 backdrop-blur lg:grid-cols-[1.15fr_0.85fr] lg:p-6">
-            <div className="flex flex-col justify-between gap-6 text-left">
-              <div>
-                <p className="text-xs font-semibold uppercase tracking-[0.35em] text-sky-500">Panel Tutor</p>
-                <h1 className="mt-3 text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">
-                  {dashboardData.summary.tutorNombre}
-                </h1>
-                <p className="mt-3 max-w-2xl text-sm leading-6 text-slate-600 sm:text-base">
-                  Resumen en tiempo real del avance de los usuarios vinculados.
-                </p>
-              </div>
+      <main className="tutor-dashboard-page">
+        <div className="tutor-dashboard-wrap">
+          <section className="tutor-profile-card">
+            <img
+              src={profile.avatarUrl || '/assets/pfps/Roman.png'}
+              alt="Avatar del alumno"
+              className="tutor-student-avatar"
+            />
 
-              <div className="grid gap-3 sm:grid-cols-3">
-                {[
-                  { label: 'Jugadores', value: dashboardData.summary.totalJugadores },
-                  { label: 'Promedio', value: dashboardData.summary.promedioScore },
-                  { label: 'Partidas', value: dashboardData.summary.totalPartidas },
-                ].map((item) => (
-                  <article
-                    key={item.label}
-                    className="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 shadow-sm"
-                  >
-                    <p className="text-xs font-medium uppercase tracking-[0.24em] text-slate-500">{item.label}</p>
-                    <strong className="mt-2 block text-2xl font-semibold tracking-tight text-slate-900">
-                      {item.value}
-                    </strong>
-                  </article>
-                ))}
-              </div>
+            <div className="tutor-profile-main">
+              <h1>{tutorAlias}</h1>
+              <p><strong>Nombre:</strong> {profile.alumnoNombre || EMPTY_DASHBOARD.profile.alumnoNombre}</p>
             </div>
 
-            <article className="flex min-h-[260px] items-center justify-center rounded-[1.5rem] bg-gradient-to-br from-sky-100 via-white to-amber-100 p-3 ring-1 ring-slate-200/70">
-              <div className="h-[260px] w-full overflow-hidden rounded-[1.25rem] bg-slate-950/5">
-                <Canvas camera={{ position: [0, 0, 3.8], fov: 55 }}>
-                  <ambientLight intensity={0.8} />
-                  <directionalLight position={[3, 2, 2]} intensity={1.2} />
-                  <pointLight position={[-2, -2, 2]} intensity={0.45} />
-                  <FloatingBadge />
-                </Canvas>
+            <div className="tutor-profile-side">
+              <p><strong>Cumpleaños:</strong> {profile.cumpleanios || EMPTY_DASHBOARD.profile.cumpleanios}</p>
+              <p><strong>Padre/Tutor:</strong> {profile.tutorNombre || dashboardData.summary.tutorNombre}</p>
+            </div>
+          </section>
+
+          {error && <p className="tutor-inline-error">{error}</p>}
+
+          <section className="tutor-grid-layout">
+            <aside className="tutor-card tutor-tips-card">
+              <h2>Tips para Padre/Tutor:</h2>
+              <ul>
+                {tips.map((tip, index) => (
+                  <li key={index}>{typeof tip === 'string' ? tip : tip.text || tip.descripcion || 'Tip disponible'}</li>
+                ))}
+              </ul>
+            </aside>
+
+            <div className="tutor-content-grid">
+              <article className="tutor-card tutor-line-card">
+                <div className="tutor-card-head">
+                  <div>
+                    <h2>Velocidad de Progreso en Matemáticas</h2>
+                    <p>Promedio de crecimiento de puntuacion en matemáticas en las últimas 4 semanas.</p>
+                  </div>
+                  <div className="tutor-pills">
+                    <span>Puntuación</span>
+                    <span>Participación</span>
+                  </div>
+                </div>
+
+                <div className="tutor-line-chart">
+                  <Recharts.ResponsiveContainer width="100%" height="100%">
+                    <Recharts.LineChart data={lineData} margin={{ top: 6, right: 4, left: 8, bottom: 0 }}>
+                      <Recharts.CartesianGrid strokeDasharray="3 3" stroke="#e5edf4" />
+                      <Recharts.XAxis dataKey="semana" stroke="#6e8ca2" tickLine={false} axisLine={false} />
+                      <Recharts.YAxis stroke="#6e8ca2" tickLine={false} axisLine={false} />
+                      <Recharts.Tooltip
+                        contentStyle={{
+                          borderRadius: '12px',
+                          border: '1px solid #dce7f1',
+                          boxShadow: '0 10px 22px rgba(22,90,135,0.16)',
+                        }}
+                      />
+                      <Recharts.Line type="monotone" dataKey="puntaje" stroke="#df6060" strokeWidth={5} dot={false} />
+                      <Recharts.Line type="monotone" dataKey="participacion" stroke="#9ec4df" strokeWidth={5} strokeDasharray="10 8" dot={false} />
+                    </Recharts.LineChart>
+                  </Recharts.ResponsiveContainer>
+                </div>
+              </article>
+
+              <article className="tutor-card tutor-badges-card">
+                <h2>Insignias</h2>
+                <div className="tutor-badges-layout">
+                  <div className="tutor-featured-badge">
+                    <div className="tutor-featured-canvas">
+                      <Canvas camera={{ position: [0, 0, 4], fov: 50 }}>
+                        <ambientLight intensity={0.72} />
+                        <directionalLight position={[2.5, 2.5, 1.5]} intensity={1.1} />
+                        <pointLight position={[-2, -2, 2]} intensity={0.45} />
+                        <BadgeCrystal />
+                      </Canvas>
+                    </div>
+                    <strong>{badges[0]?.nombre || 'Maestro de las Sumas'}</strong>
+                  </div>
+
+                  <div className="tutor-badge-list">
+                    {badges.slice(1).map((badge, index) => (
+                      <div key={`${badge.nombre || 'insignia'}-${index}`} className="tutor-badge-item">
+                        <span>{badge.icon || '🏅'}</span>
+                        <div>
+                          <p>{badge.nombre || badge.title || 'Insignia'}</p>
+                          <small>{badge.valor || badge.value || 'Logro'}</small>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </article>
+
+              <article className="tutor-card tutor-radar-card">
+                <h2>Habilidades de Matemáticas Básicas</h2>
+                <div className="tutor-radar-chart">
+                  <Recharts.ResponsiveContainer width="100%" height="100%">
+                    <Recharts.RadarChart cx="50%" cy="50%" outerRadius="68%" data={radarData}>
+                      <Recharts.PolarGrid stroke="#d3e0ea" />
+                      <Recharts.PolarAngleAxis dataKey="habilidad" tick={{ fill: '#4d6680', fontSize: 12 }} />
+                      <Recharts.Radar name="Precision" dataKey="precision" stroke="#8b78d4" fill="#8b78d4" fillOpacity={0.24} />
+                      <Recharts.Tooltip
+                        contentStyle={{
+                          borderRadius: '12px',
+                          border: '1px solid #dce7f1',
+                          boxShadow: '0 10px 22px rgba(22,90,135,0.16)',
+                        }}
+                      />
+                    </Recharts.RadarChart>
+                  </Recharts.ResponsiveContainer>
               </div>
-            </article>
+              </article>
+
+              <article className="tutor-card tutor-timeline-card">
+                <div className="tutor-card-head">
+                  <h2>Ruta de Crecimiento: Matemáticas Básicas</h2>
+                  <span>Ver todos</span>
+                </div>
+                <div className="tutor-timeline-list">
+                  {timeline.map((item, index) => (
+                    <div key={index} className="tutor-timeline-item">
+                      <div className="tutor-timeline-date">{item.fecha || item.date || 'HOY'}</div>
+                      <div className="tutor-timeline-content">
+                        <p>{item.titulo || item.title || 'Evento de progreso'}</p>
+                        <small>{item.detalle || item.description || 'Registro actualizado desde el servicio.'}</small>
+                      </div>
+                      {item.extra ? <strong>{item.extra}</strong> : null}
+                    </div>
+                  ))}
+                </div>
+              </article>
+
+              <section className="tutor-kpi-strip">
+                <article>
+                  <p>Promedio</p>
+                  <strong>{dashboardData.summary.promedioScore}</strong>
+                </article>
+                <article>
+                  <p>Partidas</p>
+                  <strong>{dashboardData.summary.totalPartidas}</strong>
+                </article>
+              </section>
+            </div>
           </section>
 
           {loading && (
-            <div className="rounded-[1.5rem] bg-white px-5 py-4 text-sm font-medium text-slate-600 shadow-sm ring-1 ring-slate-200/70">
-              Cargando dashboard...
-            </div>
-          )}
-
-          {error && (
-            <div className="rounded-[1.5rem] border border-rose-200 bg-rose-50 px-5 py-4 text-sm font-medium text-rose-700">
-              {error}
-            </div>
-          )}
-
-          {!loading && !error && (
-            <section className="grid gap-5 lg:grid-cols-[280px_minmax(0,1fr)]">
-              <aside className="rounded-[1.5rem] bg-white p-5 shadow-[0_16px_45px_rgba(15,23,42,0.07)] ring-1 ring-slate-200/70">
-                <div className="mb-4 flex items-center justify-between">
-                  <h2 className="text-xl font-semibold tracking-tight text-slate-900">Tutor Tips</h2>
-                  <span className="rounded-full bg-sky-100 px-3 py-1 text-xs font-semibold text-sky-700">AI sugerido</span>
-                </div>
-                <ul className="space-y-4 text-left text-sm leading-6 text-slate-700">
-                  {tips.map((tip, index) => (
-                    <li key={index} className="rounded-2xl bg-slate-50 px-4 py-3 ring-1 ring-slate-200/70">
-                      {typeof tip === 'string' ? tip : tip.text || tip.descripcion || 'Tip disponible'}
-                    </li>
-                  ))}
-                </ul>
-              </aside>
-
-              <div className="grid gap-5 lg:grid-cols-2">
-                <article className="min-h-[340px] rounded-[1.5rem] bg-white p-5 shadow-[0_16px_45px_rgba(15,23,42,0.07)] ring-1 ring-slate-200/70 lg:col-span-2">
-                  <div className="mb-4 flex items-start justify-between gap-4">
-                    <div>
-                      <h2 className="text-xl font-semibold tracking-tight text-slate-900">Velocidad de Progreso</h2>
-                      <p className="mt-1 text-sm text-slate-600">
-                        Promedio de crecimiento de puntuación en las últimas semanas.
-                      </p>
-                    </div>
-                    <div className="rounded-full bg-slate-100 px-4 py-2 text-xs font-semibold text-slate-600">
-                      Puntuación y participación
-                    </div>
-                  </div>
-                  <div className="h-[260px]">
-                    <ResponsiveContainer width="100%" height="100%">
-                      <LineChart data={lineData}>
-                        <CartesianGrid strokeDasharray="4 4" stroke="#e2e8f0" />
-                        <XAxis dataKey="semana" stroke="#64748b" tickLine={false} axisLine={false} />
-                        <YAxis stroke="#64748b" tickLine={false} axisLine={false} />
-                        <Tooltip
-                          contentStyle={{
-                            borderRadius: '16px',
-                            border: '1px solid #e2e8f0',
-                            boxShadow: '0 18px 50px rgba(15,23,42,0.12)',
-                          }}
-                        />
-                        <Line type="monotone" dataKey="puntaje" stroke="#f97316" strokeWidth={4} dot={false} />
-                        <Line type="monotone" dataKey="participacion" stroke="#38bdf8" strokeWidth={3} strokeDasharray="7 7" dot={false} />
-                      </LineChart>
-                    </ResponsiveContainer>
-                  </div>
-                </article>
-
-                <article className="rounded-[1.5rem] bg-white p-5 shadow-[0_16px_45px_rgba(15,23,42,0.07)] ring-1 ring-slate-200/70">
-                  <h2 className="text-xl font-semibold tracking-tight text-slate-900">Habilidades</h2>
-                  <p className="mt-1 text-sm text-slate-600">Precisión por tema en actividades y preguntas.</p>
-                  <div className="mt-4 h-[300px]">
-                    <ResponsiveContainer width="100%" height="100%">
-                      <RadarChart cx="50%" cy="50%" outerRadius="70%" data={radarData}>
-                        <PolarGrid stroke="#cbd5e1" />
-                        <PolarAngleAxis dataKey="habilidad" tick={{ fill: '#334155', fontSize: 12 }} />
-                        <Radar
-                          name="Precision"
-                          dataKey="precision"
-                          stroke="#6366f1"
-                          fill="#6366f1"
-                          fillOpacity={0.28}
-                        />
-                        <Tooltip
-                          contentStyle={{
-                            borderRadius: '16px',
-                            border: '1px solid #e2e8f0',
-                            boxShadow: '0 18px 50px rgba(15,23,42,0.12)',
-                          }}
-                        />
-                      </RadarChart>
-                    </ResponsiveContainer>
-                  </div>
-                </article>
-
-                <article className="rounded-[1.5rem] bg-white p-5 shadow-[0_16px_45px_rgba(15,23,42,0.07)] ring-1 ring-slate-200/70">
-                  <h2 className="text-xl font-semibold tracking-tight text-slate-900">Insignias</h2>
-                  <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3">
-                    {badges.map((badge, index) => (
-                      <div
-                        key={index}
-                        className="flex flex-col items-center gap-2 rounded-2xl border border-slate-200 bg-slate-50 px-3 py-4 text-center"
-                      >
-                        <span className={`h-10 w-10 rounded-2xl ${badge.color || 'bg-sky-500'} shadow-lg`} />
-                        <p className="text-sm font-semibold text-slate-900">{badge.nombre || badge.title || 'Insignia'}</p>
-                        <span className="text-xs text-slate-500">{badge.valor || badge.value || 'Logro'}</span>
-                      </div>
-                    ))}
-                  </div>
-                </article>
-
-                <article className="rounded-[1.5rem] bg-white p-5 shadow-[0_16px_45px_rgba(15,23,42,0.07)] ring-1 ring-slate-200/70">
-                  <div className="mb-4 flex items-center justify-between gap-3">
-                    <div>
-                      <h2 className="text-xl font-semibold tracking-tight text-slate-900">Ruta de Crecimiento</h2>
-                      <p className="mt-1 text-sm text-slate-600">Eventos recientes del progreso de tus jugadores.</p>
-                    </div>
-                    <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-600">Ver todo</span>
-                  </div>
-
-                  <div className="space-y-4">
-                    {timeline.map((item, index) => (
-                      <div key={index} className="flex gap-4 rounded-2xl border border-slate-200 bg-slate-50 p-4">
-                        <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-slate-300 bg-white text-xs font-bold text-slate-700">
-                          {item.fecha || item.date || 'Hoy'}
-                        </div>
-                        <div className="text-left">
-                          <p className="text-sm font-semibold text-slate-900">{item.titulo || item.title || 'Evento de progreso'}</p>
-                          <p className="mt-1 text-sm leading-6 text-slate-600">
-                            {item.detalle || item.description || 'Registro actualizado desde el servicio Node.'}
-                          </p>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </article>
-              </div>
-            </section>
+            <p className="tutor-loading-label">Cargando dashboard...</p>
           )}
         </div>
       </main>
 
-      <footer className="border-t border-slate-200 bg-white/80 py-5 text-center text-sm text-slate-500 backdrop-blur">
+      <footer className="site-footer">
         <p>@2026 NIDE OVERMATH Todos los derechos reservados</p>
       </footer>
     </>
