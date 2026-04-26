@@ -1669,22 +1669,118 @@ progress::-moz-progress-bar {
 }
 
 @media (max-width: 900px) {
-  .admin-dashboard-grid{
+  .side-bar {
+    position: fixed;
+    z-index: 100;
+    width: 0;
+    height: 100vh;
+  }
+
+  .side-bar--expanded {
+    width: 250px;
+    box-shadow: 4px 0 20px rgba(0, 0, 0, 0.15);
+  }
+
+  .side-bar-toggle {
+    position: fixed;
+    top: 60px;
+    left: 8px;
+    z-index: 101;
+    background: #eef8ff;
+    border-radius: 10px;
+    padding: 6px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .admin-dashboard-grid {
     grid-template-columns: 1fr;
+    padding: 16px;
+    gap: 16px;
   }
 
   .progreso-container,
   .islas-progreso-container,
-  .error-alert{
+  .error-alert {
     grid-column: span 1;
   }
 
-  .islas-progreso-container{
+  .islas-progreso-container {
     grid-template-columns: 1fr 1fr;
+  }
+
+  .progreso-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .progreso-actions {
+    width: 100%;
+  }
+
+  .progreso-search {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .progreso-container {
+    overflow-x: auto;
+  }
+
+  .progreso-table {
+    min-width: 600px;
   }
 }
 
 @media (max-width: 600px) {
+  .side-bar {
+    position: fixed;
+    width: 0;
+    height: 100vh;
+    z-index: 100;
+  }
+
+  .side-bar--expanded {
+    width: 220px;
+  }
+
+  .admin-dashboard-grid {
+    padding: 12px;
+    gap: 12px;
+  }
+
+  .dashboard-card {
+    padding: 16px;
+  }
+
+  .stat-number {
+    font-size: 1.6rem;
+  }
+
+  .alert-name {
+    font-size: 0.95rem;
+  }
+
+  .see-all-button {
+    width: 100%;
+  }
+
+  .progreso-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .progreso-actions {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .progreso-filter,
+  .progreso-search {
+    width: 100%;
+  }
+
   .dashboard-table {
     font-size: 0.85rem;
   }
@@ -1699,8 +1795,12 @@ progress::-moz-progress-bar {
     gap: 6px;
   }
 
-  .islas-progreso-container{
+  .islas-progreso-container {
     grid-template-columns: 1fr;
+  }
+
+  .islas-progreso-card {
+    padding: 14px;
   }
 }
 
