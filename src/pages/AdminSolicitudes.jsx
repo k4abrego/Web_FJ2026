@@ -1,6 +1,5 @@
 import { useEffect, useState, useCallback } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import SiteHeader from '../components/Header'
 import SideBar from '../components/SideBar'
 
 const API_BASE = import.meta.env.VITE_API_URL
@@ -51,7 +50,6 @@ function AdminDashboardSolicitudesPage() {
   if (!session || session.role !== 'admin') {
     return (
       <>
-        <SiteHeader />
         <main className="login-main">
           <section className="login-card">
             <h1>Acceso restringido</h1>
@@ -135,7 +133,6 @@ function AdminDashboardSolicitudesPage() {
 
   return (
     <>
-      <SiteHeader />
 
       <div style={{ display: 'flex' }}>
       <SideBar />

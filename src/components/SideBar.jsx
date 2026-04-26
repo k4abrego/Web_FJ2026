@@ -13,7 +13,6 @@ function SideBar() {
   return (
     <div className={`side-bar ${expanded ? 'side-bar--expanded' : ''}`}>
       <div className="side-bar-header">
-        {/* <img src={NideLogo} className="logo-side-bar" alt="Logo" /> */}
         <button
           className="side-bar-toggle"
           onClick={() => setExpanded(!expanded)}
