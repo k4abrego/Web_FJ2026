@@ -142,7 +142,7 @@ function TutorMainDashboard() {
       setError('')
 
       const endpoints = [
-        `${API_BASE}/dashboard_tutor/${session.id_cuenta}`,
+        `${API_BASE}/tutor_dashboard/${session.id_cuenta}`,
       ]
 
       for (let index = 0; index < endpoints.length; index += 1) {
