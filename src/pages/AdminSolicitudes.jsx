@@ -203,7 +203,7 @@ function AdminDashboardSolicitudesPage() {
       <SideBar />
         <main className="dashboard-main">
           <div className="dashboard-container">
-            <h1>Panel de Administración</h1>
+            <h1>Panel de Solicitudes</h1>
             <p className="dashboard-subtitle">
               Gestiona las solicitudes de vinculación entre tutores y jugadores.
             </p>

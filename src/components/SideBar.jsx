@@ -4,6 +4,7 @@ import { SideBarData } from './SideBarData'
 import MenuIcon from '@mui/icons-material/Menu'
 import CloseIcon from '@mui/icons-material/Close'
 import NideLogo from '/assets/logos/estrella.png'
+import ReportProblemIcon from '@mui/icons-material/ReportProblem';
 
 function SideBar() {
   const [expanded, setExpanded] = useState(false)

@@ -3,6 +3,7 @@ import HomeIcon from '@mui/icons-material/Home';
 import AssessmentIcon from '@mui/icons-material/Assessment';
 import SummarizeIcon from '@mui/icons-material/Summarize';
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
+import ReportProblemIcon from '@mui/icons-material/ReportProblem';
 
 export const SideBarData  = [
     {
@@ -11,14 +12,14 @@ export const SideBarData  = [
         link: "/"
     },
     {
-        title: "General",
-        icon: <AssessmentIcon/>,
+        title: "Accion Rapida",
+        icon: <ReportProblemIcon/>,
         link: "/admin/dashboard"
     },
     {
         title: "Reportes",
-        icon: <SummarizeIcon/>,
-        link: "/home"
+        icon: <AssessmentIcon/>,
+        link: "/admin/reportes"
     },
     {
         title: "Solicitudes",
