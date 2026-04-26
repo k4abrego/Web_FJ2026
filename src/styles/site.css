@@ -953,6 +953,58 @@ h3 {
   color: #8a6d1b;
 }
 
+.estado-activo {
+  background: #d4f5e2;
+  color: #1a6b3e;
+}
+
+.estado-atascado {
+  background: #fff3d6;
+  color: #8a6d1b;
+}
+
+.estado-inactivo {
+  background: #e8edf1;
+  color: #5a6a78;
+}
+
+.progreso-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 18px;
+}
+
+.pagination-arrow {
+  background: none;
+  border: 2px solid #c9dff0;
+  border-radius: 10px;
+  padding: 6px 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-navy);
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.pagination-arrow:hover:not(:disabled) {
+  background: #eaf4fb;
+  border-color: #78c6ea;
+}
+
+.pagination-arrow:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.pagination-info {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-navy);
+}
+
 .action-cell {
   display: flex;
   gap: 8px;
@@ -1096,8 +1148,8 @@ h3 {
 .side-bar-header {
   display: flex;
   align-items: center;
+  justify-content: center;
   padding: 12px;
-  gap: 10px;
 }
 
 .logo-side-bar {
