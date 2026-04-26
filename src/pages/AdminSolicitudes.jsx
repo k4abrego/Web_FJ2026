@@ -1,5 +1,5 @@
 import { useEffect, useState, useCallback } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link} from 'react-router-dom'
 import SideBar from '../components/SideBar'
 
 const API_BASE = import.meta.env.VITE_API_URL
@@ -11,7 +11,6 @@ const ESTADO_LABEL = {
 }
 
 function AdminDashboardSolicitudesPage() {
-  const navigate = useNavigate()
   const session = JSON.parse(localStorage.getItem('session') || 'null')
 
   const [solicitudes, setSolicitudes] = useState([])
@@ -21,31 +20,97 @@ function AdminDashboardSolicitudesPage() {
   const [rechazoModal, setRechazoModal] = useState(null)
   const [motivoRechazo, setMotivoRechazo] = useState('')
 
-  
+  const [cuentasInactivas, setCuentasInactivas] = useState([])
+  const [loadingCuentas, setLoadingCuentas] = useState(true)
+  const [errorCuentas, setErrorCuentas] = useState('')
+  const [cuentaActionLoading, setCuentaActionLoading] = useState(null)
 
   const fetchSolicitudes = useCallback(async (isRefresh = false) => {
-      if (isRefresh) {
-        setLoading(true)
-        setError('')
+    if (isRefresh) {
+      setLoading(true)
+      setError('')
+    }
+    try {
+      const res = await fetch(`${API_BASE}/solicitudes_vinculacion`)
+      const data = await res.json()
+      if (!res.ok) {
+        setError(data.error || 'Error al obtener solicitudes.')
+        return
       }
-      try {
-          const res = await fetch(`${API_BASE}/solicitudes_vinculacion`)
-          const data = await res.json()
-          if (!res.ok) {
-              setError(data.error || 'Error al obtener solicitudes.')
-              return
-          }
-          setSolicitudes(data.solicitudes || [])
-      } catch {
-          setError('Error de conexión.')
-      } finally {
-          setLoading(false)
-      }
+      setSolicitudes(data.solicitudes || [])
+    } catch {
+      setError('Error de conexión.')
+    } finally {
+      setLoading(false)
+    }
   }, [])
+
   useEffect(() => {
-      if (session?.role === 'admin') fetchSolicitudes()
+    if (session?.role === 'admin') fetchSolicitudes()
   }, [fetchSolicitudes])
 
+  useEffect(() => {
+    const fetchCuentasInactivas = async () => {
+      setLoadingCuentas(true)
+      setErrorCuentas('')
+      try {
+        const res = await fetch(`${API_BASE}/cuentas_inactivas`)
+        const data = await res.json()
+        if (!res.ok) {
+          setErrorCuentas(data.error || 'Error al obtener cuentas inactivas.')
+          return
+        }
+        setCuentasInactivas(data)
+      } catch {
+        setErrorCuentas('Error de conexión.')
+      } finally {
+        setLoadingCuentas(false)
+      }
+    }
+    if (session?.role === 'admin') fetchCuentasInactivas()
+  }, [])
+
+  const handleAceptarCuenta = async (cuenta) => {
+    setCuentaActionLoading(cuenta.id_cuenta)
+    try {
+      const res = await fetch(`${API_BASE}/activar_rechazar_cuenta`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id_cuenta: cuenta.id_cuenta, accion: 'aceptar' }),
+      })
+      const data = await res.json()
+      if (!res.ok) {
+        alert(data.error || 'Error al aceptar la cuenta.')
+        return
+      }
+      setCuentasInactivas((prev) => prev.filter((c) => c.id_cuenta !== cuenta.id_cuenta))
+    } catch {
+      alert('Error de conexión.')
+    } finally {
+      setCuentaActionLoading(null)
+    }
+  }
+
+  const handleRechazarCuenta = async (cuenta) => {
+    setCuentaActionLoading(cuenta.id_cuenta)
+    try {
+      const res = await fetch(`${API_BASE}/activar_rechazar_cuenta`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id_cuenta: cuenta.id_cuenta, accion: 'rechazar' }),
+      })
+      const data = await res.json()
+      if (!res.ok) {
+        alert(data.error || 'Error al rechazar la cuenta.')
+        return
+      }
+      setCuentasInactivas((prev) => prev.filter((c) => c.id_cuenta !== cuenta.id_cuenta))
+    } catch {
+      alert('Error de conexión.')
+    } finally {
+      setCuentaActionLoading(null)
+    }
+  }
 
   if (!session || session.role !== 'admin') {
     return (
@@ -233,6 +298,67 @@ function AdminDashboardSolicitudesPage() {
                   </section>
                 )}
               </>
+            )}
+
+            <hr style={{ border: 'none', borderTop: '1px solid #e0e9f0', margin: '32px 0' }} />
+
+            <h2 style={{ marginBottom: 4 }}>Cuentas nuevas por aprobar</h2>
+            <p className="dashboard-subtitle">
+              Acepta o rechaza cuentas recién registradas que aún están inactivas.
+            </p>
+
+            {loadingCuentas && <p className="dashboard-status">Cargando cuentas inactivas...</p>}
+            {errorCuentas && <p className="dashboard-status is-error">{errorCuentas}</p>}
+
+            {!loadingCuentas && !errorCuentas && (
+              <section className="dashboard-section">
+                <h2>Cuentas inactivas ({cuentasInactivas.length})</h2>
+                {cuentasInactivas.length === 0 ? (
+                  <p className="dashboard-empty">No hay cuentas pendientes de aprobación.</p>
+                ) : (
+                  <div className="dashboard-table-wrap">
+                    <table className="dashboard-table">
+                      <thead>
+                        <tr>
+                          <th>ID</th>
+                          <th>Correo</th>
+                          <th>Rol</th>
+                          <th>Fecha de registro</th>
+                          <th>Acciones</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {cuentasInactivas.map((c) => (
+                          <tr key={c.id_cuenta}>
+                            <td>{c.id_cuenta}</td>
+                            <td>{c.correo}</td>
+                            <td>
+                              <span className="estado-badge estado-pendiente">{c.rol}</span>
+                            </td>
+                            <td>{new Date(c.fecha_creacion).toLocaleDateString('es-MX')}</td>
+                            <td className="action-cell">
+                              <button
+                                className="btn-accept"
+                                disabled={cuentaActionLoading === c.id_cuenta}
+                                onClick={() => handleAceptarCuenta(c)}
+                              >
+                                {cuentaActionLoading === c.id_cuenta ? '...' : 'Aceptar'}
+                              </button>
+                              <button
+                                className="btn-reject"
+                                disabled={cuentaActionLoading === c.id_cuenta}
+                                onClick={() => handleRechazarCuenta(c)}
+                              >
+                                Rechazar
+                              </button>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                )}
+              </section>
             )}
           </div>
         </main>
