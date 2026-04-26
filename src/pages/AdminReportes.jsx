@@ -181,12 +181,12 @@ function AdminReportes() {
               ) : (
                 <ResponsiveContainer width="100%" height={Math.max(200, errorIsla.length * 56)}>
                   <BarChart data={errorIsla} layout="vertical" margin={{ left: 10, right: 20 }}>
-                    <XAxis type="number" domain={[0, maxError]} tickFormatter={v => `${v}%`} />
+                    <XAxis type="number" domain={[0, 100]} tickFormatter={v => `${v}%`} />
                     <YAxis type="category" dataKey="label" width={110} tick={{ fontSize: 13 }} />
                     <Tooltip content={<CustomTooltip />} />
                     <Bar dataKey="error_porcentaje" name="Error" radius={[0, 8, 8, 0]} barSize={28}>
                       {errorIsla.map((entry) => (
-                        <Cell key={entry.isla} fill={ISLA_COLORS[entry.isla] || '#8bb8d6'} opacity={0.85} />
+                        <Cell key={entry.isla} fill={ISLA_COLORS[entry.isla] || '#8bb8d6'} />
                       ))}
                     </Bar>
                   </BarChart>
