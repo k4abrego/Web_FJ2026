@@ -350,8 +350,8 @@ h3 {
 }
 
 .tutorial-placeholder {
-  width: min(100%, 1280px);
-  min-height: clamp(250px, 38vw, 430px);
+  width: 1280px;
+  min-height: 720px;
   margin: 0;
   margin-left: auto;
   border-radius: 30px;
@@ -2347,3 +2347,42 @@ progress::-moz-progress-bar {
   }
 }
 
+/* Seccion de creadores */
+.creators-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); 
+  gap: 60px;
+  justify-items: center;
+}
+
+.creator-card {
+  text-align: center;
+}
+
+.creator-img {
+  width: 255px;
+  height: 250px;
+  border-radius: 20px;
+  overflow: hidden;
+  background: #eee;
+}
+
+.creator-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.creator-name {
+  margin-top: 10px;
+  font-size: 26px;
+  color: #555;
+}
+
+.main-phraseee {
+  text-align: center;
+  font-size: 38px;
+  color: #6b6b6b;
+  margin: 40px 0;
+  font-weight: 500;
+}

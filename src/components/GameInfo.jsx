@@ -9,11 +9,30 @@ function BlockHeading({ title, reverse = false }) {
   )
 }
 
+
 function GameInfoBlocks() {
+  const creators = [
+    { name: 'Regina Hernández', img: 'regii.jpg'},
+    { name: 'Gabriel Manzo', img: 'gabriel.jpg' },
+    { name: 'Emiliano García', img: 'emi.jpg'},
+    { name: 'Rodrigo Toledo', img: 'rod.jpg' },
+    { name: 'Karen Abrego', img: 'ka.jpg' },
+   ];
+
   return (
     <section className="game-info-section" aria-label="Informacion del juego">
+      <p className="main-phraseee">
+        ¡Resuelve retos, gana puntos y conquista islas!
+      </p>
       <article className="info-block info-block--right">
-        <BlockHeading title="Acerca del juego" reverse />
+        <BlockHeading title="Tutorial" reverse />
+        <div className="tutorial-placeholder" role="region" aria-label="Video tutorial pronto">
+            <p>Video del tutorial</p>
+        </div>
+      </article>
+
+      <article className="info-block info-block--right">
+        <BlockHeading title="Acerca del juego"/>
         <p className="about-game-text">
           Overmath donde las matematicas te ayudan a avanzar. Entra a una isla mágica y
           comienza tu recorrido resolviendo retos que pondran a prueba tu mente. Cada isla
@@ -27,7 +46,7 @@ function GameInfoBlocks() {
       </article>
 
       <article className="info-block">
-        <BlockHeading title="¿Como jugar Overmath?" />
+        <BlockHeading title="¿Como jugar Overmath?" reverse/>
         <div className="how-to-play-container">
           <ul className="how-to-play-list">
             <li>Resuelve los problemas lo mas rapido y correctamente posible.</li>
@@ -45,9 +64,16 @@ function GameInfoBlocks() {
       </article>
 
       <article className="info-block info-block--right">
-        <BlockHeading title="Tutorial" reverse />
-        <div className="tutorial-placeholder" role="region" aria-label="Video tutorial pronto">
-            <p>Video del tutorial</p>
+        <BlockHeading title="Creadores" />
+      <div className="creators-container">
+          {creators.map((creator, index) => (
+            <div className="creator-card" key={index}>
+              <div className="creator-img">
+                <img src={creator.img} alt={creator.name} />
+              </div>
+              <p className="creator-name">{creator.name}</p>
+            </div>
+          ))}
         </div>
       </article>
     </section>
