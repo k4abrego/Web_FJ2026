@@ -46,7 +46,7 @@ h3 {
 }
 
 .site-nav {
-  min-height: 36px;
+  min-height: 46px;
   padding: 2px 6px;
   display: flex;
   align-items: center;
@@ -171,11 +171,6 @@ h3 {
   background: #d4a44e;
   color: #1f3e60 !important;
   transform: translateY(-1px);
-}
-
-.header-lower-band {
-  height: 14px;
-  background: linear-gradient(to right, #91d6ec, #7cc8e5, #8bd0f2);
 }
 
 .unity-hero {
@@ -444,7 +439,7 @@ h3 {
   background: var(--color-navy);
   color: var(--color-pink);
   text-align: left;
-  padding: 8px 20px;
+  padding: 15px;
   line-height: 1.2;
 }
 
@@ -472,6 +467,18 @@ h3 {
   background: #dfe8f3;
 }
 
+/* .conocenos-who {
+  background-color: #FFFFFC;
+  padding: 60px 0;
+} */
+
+.conocenos-who-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: center;
+}
+
 .conocenos-hero {
   padding: 18px 0 34px;
 }
@@ -490,6 +497,10 @@ h3 {
 
 .conocenos-hero-copy {
   padding: clamp(30px, 5vw, 58px) clamp(20px, 4vw, 56px);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 18px;
 }
 
 .conocenos-hero-copy h1 {
@@ -509,7 +520,9 @@ h3 {
 }
 
 .conocenos-cta {
-  margin-top: 52px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   border: 0;
   border-radius: 20px;
   padding: 12px 22px;
@@ -519,6 +532,7 @@ h3 {
   font-size: 1.05rem;
   font-weight: 700;
   cursor: pointer;
+  text-decoration: none;
 }
 
 .conocenos-hero-media {
@@ -562,6 +576,119 @@ h3 {
   background-repeat: no-repeat;
   background-attachment: local;
   box-shadow: 0 12px 26px rgba(26, 55, 84, 0.18);
+}
+
+.transform-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 35px;
+}
+
+.transform-title {
+  text-align: center;
+  font-size: 38px;
+  color: #6b6b6b;
+  margin: 30px 0;
+  font-weight: 500;
+}
+
+/* .info-block-star {
+  width: 28px;
+  height: 28px;
+  background: url('/assets/logos/star.png') no-repeat center/contain;
+} */
+
+.cards-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+  margin-top: 30px;
+}
+
+.card {
+  background: #e9eef3;
+  padding: 25px;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+
+.stats {
+  display: grid;
+  justify-items: center;
+  gap: 12px;
+  margin: 64px auto 30px;
+  padding: 14px 0 8px;
+  text-align: center;
+}
+
+.stats-title {
+  margin: 0;
+  color: #133a67;
+  font-size: clamp(1.6rem, 2.8vw, 2.4rem);
+  font-weight: 600;
+}
+
+.stats-grid {
+  width: min(780px, 100%);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(10px, 2vw, 18px);
+  align-items: start;
+}
+
+.conocenos-page .stats .stat-item {
+  display: grid;
+  justify-items: center;
+  gap: 6px;
+  padding: 10px 8px;
+}
+
+.conocenos-page .stats .counter {
+  display: block;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #3A7194;
+  font-family: var(--font-family);
+  font-size: clamp(2.4rem, 4.5vw, 45px);
+  font-weight: 800;
+  line-height: 1;
+}
+
+.conocenos-page .stats .stat-label {
+  margin: 0;
+  color: #3A7194;
+  font-size: clamp(1rem, 1.5vw, 1.2rem);
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.carousel {
+  overflow: hidden;
+  width: 100%;
+}
+
+.carousel-track {
+  display: flex;
+  gap: 20px;
+  animation: scroll 25s linear infinite;
+}
+
+.carousel img {
+  width: 400PX;
+  height: 400px;
+  object-fit: cover;
+  border-radius: 20px;
+  margin-bottom: 40px;
+}
+
+@keyframes scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
 }
 
 @media (max-width: 600px) {
@@ -633,6 +760,11 @@ h3 {
   .conocenos-who-media {
     min-height: 220px;
     border-radius: 20px;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+    width: min(360px, 100%);
   }
 }
 
