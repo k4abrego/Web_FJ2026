@@ -350,8 +350,8 @@ h3 {
 }
 
 .tutorial-placeholder {
-  width: 1280px;
-  min-height: 720px;
+  width: 1200px;
+  min-height: 660px;
   margin: 0;
   margin-left: auto;
   border-radius: 30px;
@@ -2364,7 +2364,7 @@ progress::-moz-progress-bar {
   height: 250px;
   border-radius: 20px;
   overflow: hidden;
-  background: #eee;
+  background: #c4c4c486;
 }
 
 .creator-img img {
