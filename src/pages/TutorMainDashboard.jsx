@@ -1,5 +1,4 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { Link } from 'react-router-dom'
 import { Canvas, useFrame } from '@react-three/fiber'
 import * as Recharts from 'recharts'
 import SiteHeader from '../components/Header'
@@ -196,26 +195,6 @@ function TutorMainDashboard() {
   const profile = dashboardData.profile || EMPTY_DASHBOARD.profile
   const tutorAlias = profile.alias || session?.correo?.split('@')?.[0] || EMPTY_DASHBOARD.profile.alias
 
-  if (!session || session.role !== 'tutor') {
-    return (
-      <>
-        <SiteHeader />
-        <main className="tutor-dashboard-page">
-          <section className="tutor-restricted-card">
-            <p className="tutor-restricted-kicker">Acceso restringido</p>
-            <h1>Debes iniciar sesión como padre/tutor</h1>
-            <p>
-              Inicia sesión con una cuenta de padre/tutor para ver el panel de progreso.
-            </p>
-            <Link to="/login?role=tutor" className="tutor-restricted-action">
-              Iniciar sesión
-            </Link>
-          </section>
-        </main>
-      </>
-    )
-  }
-
   return (
     <>
       <SiteHeader />
@@ -352,17 +331,6 @@ function TutorMainDashboard() {
                   ))}
                 </div>
               </article>
-
-              <section className="tutor-kpi-strip">
-                <article>
-                  <p>Promedio</p>
-                  <strong>{dashboardData.summary.promedioScore}</strong>
-                </article>
-                <article>
-                  <p>Partidas</p>
-                  <strong>{dashboardData.summary.totalPartidas}</strong>
-                </article>
-              </section>
             </div>
           </section>
 
