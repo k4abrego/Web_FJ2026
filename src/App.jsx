@@ -21,7 +21,8 @@ function App() {
       <Route path="/login-tutor" element={<LoginTutorPage />} />
       <Route path="/registro" element={<RegistroPage />} />
       <Route path="/vincular-jugador" element={<SolicitudVinculacionPage />} />
-      <Route path="/tutor/dashboard" element={<TutorMainDashboard />} />
+      <Route path="/tutor-dashboard" element={<TutorMainDashboard />} />
+      <Route path="/tutor/dashboard" element={<Navigate to="/tutor-dashboard" replace />} />
       <Route path="/admin/solicitudes" element={<AdminDashboardSolicitudesPage />} />
       <Route path="/admin/reportes" element={<AdminReportes />} />
       <Route path="/admin/dashboard" element={<AdminMainDashboard />} />
