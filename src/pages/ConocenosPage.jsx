@@ -108,20 +108,6 @@ function ConocenosPage() {
 
         <section className="stats page-shell" aria-labelledby="stats-title">
           <div className="stats-grid">
-            <article className="stat-item">
-              <h3 className="counter stat-number" data-target="100" data-prefix="+">0</h3>
-              <p className="stat-label">familias apoyadas</p>
-            </article>
-
-            <article className="stat-item">
-              <h3 className="counter stat-number" data-target="50" data-prefix="+">0</h3>
-              <p className="stat-label">actividades realizadas</p>
-            </article>
-
-            <article className="stat-item">
-              <h3 className="counter stat-number" data-target="+200" data-prefix="+">0</h3>
-              <p className="stat-label">niños beneficiados</p>
-            </article>
           </div>
         </section>
 
