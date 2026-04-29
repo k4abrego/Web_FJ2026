@@ -58,7 +58,7 @@ function LoginPage() {
 
       setStatus('is-success')
       setMessage('Acceso correcto. Redirigiendo...')
-      setTimeout(() => navigate(role === 'admin' ? '/admin' : '/tutor/dashboard'), 1000)
+      setTimeout(() => navigate(role === 'admin' ? '/admin' : '/tutor-dashboard'), 1000)
     } catch {
       setStatus('is-error')
       setMessage('Error de conexión. Intenta de nuevo.')
