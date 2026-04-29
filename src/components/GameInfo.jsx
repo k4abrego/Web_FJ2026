@@ -32,7 +32,7 @@ function GameInfoBlocks() {
         ¡Resuelve retos, gana puntos y conquista islas!
       </p>
       <article className="info-block">
-        <BlockHeading title="Tutorial" reverse />
+        <BlockHeading title="Trailer" reverse />
         <div
           className="tutorial-placeholder"
           role="region"
