@@ -1,3 +1,10 @@
+//import regii from '/assets/creators/Regii.png';
+import gabriel from '/assets/creators/Gabriel.jpg';
+import emiliano from '/assets/creators/Emiliano.jpg';
+import rod from '/assets/creators/Rod.jpg';
+import karen from '/assets/creators/Ka.jpg';
+
+
 function BlockHeading({ title, reverse = false }) {
   return (
     <div className={`info-block-heading${reverse ? ' info-block-heading--reverse' : ''}`}>
@@ -12,11 +19,11 @@ function BlockHeading({ title, reverse = false }) {
 
 function GameInfoBlocks() {
   const creators = [
-    { name: 'Regina Hernández', img: 'regii.jpg'},
-    { name: 'Gabriel Manzo', img: 'gabriel.jpg' },
-    { name: 'Emiliano García', img: 'emi.jpg'},
-    { name: 'Rodrigo Toledo', img: 'rod.jpg' },
-    { name: 'Karen Abrego', img: 'ka.jpg' },
+    { name: 'Regina Hernández', img: '/assets/creators/Ka.jpg'},
+    { name: 'Gabriel Manzo', img: gabriel },
+    { name: 'Emiliano García', img: emiliano },
+    { name: 'Rodrigo Toledo', img: rod },
+    { name: 'Karen Abrego', img: karen },
    ];
 
   return (
@@ -24,11 +31,22 @@ function GameInfoBlocks() {
       <p className="main-phraseee">
         ¡Resuelve retos, gana puntos y conquista islas!
       </p>
-
       <article className="info-block">
         <BlockHeading title="Tutorial" reverse />
-        <div className="tutorial-placeholder" role="region" aria-label="Sección del video tutorial">
-            <p>Video del tutorial</p>
+        <div
+          className="tutorial-placeholder"
+          role="region"
+          aria-label="Sección del video tutorial"
+        >
+          <iframe
+            width="100%"
+            height="400"
+            src="https://www.youtube.com/embed/NDJMAu50SvU"
+            title="Tutorial Overmath"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          ></iframe>
         </div>
       </article>
 
@@ -70,7 +88,7 @@ function GameInfoBlocks() {
           {creators.map((creator, index) => (
             <div className="creator-card" key={index}>
               <div className="creator-img">
-                <img src={`/assets/pfps/${creator.img}`} alt={creator.name} />
+                <img src={creator.img} alt={creator.name} />
               </div>
               <p className="creator-name">{creator.name}</p>
             </div>
