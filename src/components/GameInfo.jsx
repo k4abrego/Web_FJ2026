@@ -1,4 +1,4 @@
-//import regii from '/assets/creators/Regii.png';
+import regii from '/assets/creators/Regii.jpg';
 import gabriel from '/assets/creators/Gabriel.jpg';
 import emiliano from '/assets/creators/Emiliano.jpg';
 import rod from '/assets/creators/Rod.jpg';
@@ -19,7 +19,7 @@ function BlockHeading({ title, reverse = false }) {
 
 function GameInfoBlocks() {
   const creators = [
-    { name: 'Regina Hernández', img: '/assets/creators/Ka.jpg'},
+    { name: 'Regina Hernández', img: regii },
     { name: 'Gabriel Manzo', img: gabriel },
     { name: 'Emiliano García', img: emiliano },
     { name: 'Rodrigo Toledo', img: rod },
