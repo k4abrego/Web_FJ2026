@@ -118,7 +118,7 @@ function AtencionNecesariaWidget() {
                 );
             })}
 
-            <button className="see-all-button">Ver Todas las Alertas</button>
+            {/* <button className="see-all-button">Ver Todas las Alertas</button> */}
         </div>
     )
 }
