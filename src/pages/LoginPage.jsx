@@ -50,6 +50,13 @@ function LoginPage() {
       }
 
       const user = data.result?.user
+      if (user && Number(user.activo) === 0) {
+        setStatus('is-error')
+        setMessage('Un administrador debe aceptar primero tu cuenta.')
+        setIsSubmitting(false)
+        return
+      }
+
       localStorage.setItem('session', JSON.stringify({
         id_cuenta: user?.id_cuenta,
         correo: user?.correo,

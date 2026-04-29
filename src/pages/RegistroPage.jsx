@@ -53,8 +53,8 @@ function RegistroPage() {
       }
 
       setStatus('is-success')
-      setMessage('Cuenta creada exitosamente. Redirigiendo...')
-      setTimeout(() => navigate('/login?role=tutor'), 1200)
+      setMessage('Cuenta creada. Un administrador debe aprobarla antes de que puedas iniciar sesión.')
+      setTimeout(() => navigate('/login?role=tutor'), 2500)
     } catch {
       setStatus('is-error')
       setMessage('Error de conexión. Intenta de nuevo.')

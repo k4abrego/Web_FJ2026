@@ -86,7 +86,7 @@ function ResumenGeneralWidget() {
             )
         })}
 
-        <button className="see-all-button" onClick={()=> console.log('clicked')}>Ver Todos los Estudiantes</button>        
+        {/* <button className="see-all-button" onClick={()=> console.log('clicked')}>Ver Todos los Estudiantes</button>         */}
     </div>
   )
 }
