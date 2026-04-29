@@ -99,10 +99,10 @@ function ConocenosPage() {
 
         <section className="conocenos-how page-shell" aria-labelledby="conocenos-how-title">
           <div className="cards-container">
-            <div className="card">Talleres y actividades</div>
-            <div className="card">Donaciones solidarias</div>
-            <div className="card">Comunidad</div>
-            <div className="card">Voluntariado</div>
+            <div className="card">Talleres y actividades <p className="card-description">Brindamos talleres artísticos, deportivos y educativos para niñas, niños y jóvenes.</p></div>
+            <div className="card">Donaciones solidarias <p className="card-description">Recolectamos ropa, juguetes, alimentos y artículos esenciales para familias que lo necesitan.</p></div>
+            <div className="card">Comunidad <p className="card-description">Creamos espacios seguros donde las personas conviven, aprenden y crecen juntas.</p></div>
+            <div className="card">Voluntariado <p className="card-description">Personas y empresas se unen para apoyar nuestras actividades y eventos.</p></div>
           </div>
         </section>
 
