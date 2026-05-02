@@ -10,6 +10,8 @@ import AdminDashboardSolicitudesPage from './pages/AdminSolicitudes'
 import AdminMainDashboard from './pages/AdminMainDashboard'
 import AdminReportes from './pages/AdminReportes'
 import TutorMainDashboard from './pages/TutorMainDashboard'
+import ForgotPasswordPage from './pages/ForgotPasswordPage'
+import ResetPasswordPage from './pages/ResetPasswordPage'
 
 function App() {
   return (
@@ -26,6 +28,8 @@ function App() {
       <Route path="/admin/solicitudes" element={<AdminDashboardSolicitudesPage />} />
       <Route path="/admin/reportes" element={<AdminReportes />} />
       <Route path="/admin/dashboard" element={<AdminMainDashboard />} />
+      <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+      <Route path="/reset-password" element={<ResetPasswordPage />} />
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   )

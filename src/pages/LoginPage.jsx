@@ -147,6 +147,10 @@ function LoginPage() {
                   required
                 />
 
+                <Link to="/forgot-password" className="login-forgot-link">
+                  ¿Olvidaste tu contraseña?
+                </Link>
+
                 <button type="submit" disabled={isSubmitting}>
                   {isSubmitting ? 'Entrando...' : 'Entrar'}
                 </button>

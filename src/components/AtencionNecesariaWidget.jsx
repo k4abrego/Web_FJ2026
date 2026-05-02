@@ -104,7 +104,7 @@ function AtencionNecesariaWidget() {
                 <h2 className="atencion-alert">{alertas.length}</h2>
             </div>
 
-            {alertas.map((alerta, i) => {
+            {alertas.slice(0, 5).map((alerta, i) => {
                 const iniciales = getIniciales(alerta.primer_nombre, alerta.apellidos);
                 return (
                     <div className="alert-item" key={`${alerta.id_jugador}-${alerta.tipo_alerta}-${i}`}>
